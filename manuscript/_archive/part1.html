@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The Skeptic: a reader-led investigation of scientific claims, evidence, assumptions, and uncertainty. Draft manuscript v0.1.">
+<title>The Skeptic — A Reader-Led Investigation</title>
+<style>
+  :root{
+    --ink:#17242c; --muted:#52636b; --paper:#fbfaf7; --teal:#176b68;
+    --teal-light:#e6f0ed; --gold:#c28a3b; --line:#d8ded9; --navy:#122831;
+    --serif:Georgia,"Times New Roman",serif; --sans:"Aptos","Segoe UI",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  @page{ size:A5; margin:16mm 15mm 18mm; @bottom-center{content:counter(page); font:8pt var(--sans); color:#52636b} }
+  @page cover{ margin:0; background:#10232c; @bottom-center{content:""} }
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font:10.5pt/1.72 var(--serif)}
+  a{color:var(--teal);text-decoration:none}
+  h1,h2,h3{color:var(--navy);font-family:var(--serif)}
+  p{margin:.45rem 0 .9rem}
+  .cover{page:cover;min-height:190mm;padding:24mm 14mm;display:flex;flex-direction:column;justify-content:space-between;color:#f7f5ef;
+    background:radial-gradient(ellipse at 82% 28%, rgba(39,130,123,.46), transparent 36%),linear-gradient(135deg,#10232c,#183d45 68%,#10232c)}
+  .cover .mark{color:#c4d9d2;font:700 9pt var(--sans);letter-spacing:.22em;text-transform:uppercase}
+  .cover h1{margin:18mm 0 6mm;font:500 44pt/.92 var(--serif);letter-spacing:-.04em;color:#f7f5ef}
+  .cover .subtitle{max-width:88mm;margin:0;color:#d7e2dc;font:12pt/1.5 var(--serif)}
+  .cover-meta{color:#c4d9d2;font:8pt var(--sans);letter-spacing:.08em;text-transform:uppercase}
+  .titlepage{page-break-before:always;text-align:center;padding-top:60mm}
+  .titlepage h1{font:500 34pt/1.05 var(--serif);letter-spacing:-.03em}
+  .titlepage .sub{font:12pt/1.5 var(--serif);color:#30464d;margin-top:8mm}
+  .titlepage .author{font:8pt var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#52636b;margin-top:26mm}
+  .titlepage .ed{font:9pt var(--serif);font-style:italic;color:#52636b;margin-top:2mm}
+  section{page-break-before:always}
+  .eyebrow{color:var(--teal);font:700 8pt var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:6pt}
+  h2{font-size:20pt;line-height:1.12;letter-spacing:-.02em;margin:0 0 10pt}
+  .part-divider{page-break-before:always;text-align:left;padding-top:44mm}
+  .part-divider .num{font:500 60pt/.9 var(--serif);color:#d8ded9;letter-spacing:-.05em}
+  .part-divider h2{font-size:24pt;margin-top:6mm}
+  .part-divider .lede{max-width:120mm;font:11pt/1.6 var(--serif);color:#30464d}
+  .chapter{page-break-before:always}
+  .casefile{display:inline-block;padding:2pt 8pt;border:1px solid var(--teal);color:var(--teal);font:700 7.5pt var(--sans);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8pt}
+  .chapter-brief{font:10.5pt/1.6 var(--serif);font-style:italic;color:#30464d}
+  .must-answer{margin:8pt 0;padding-left:16pt}
+  .must-answer li{margin-bottom:3pt}
+  .lead{max-width:150mm;font:11.5pt/1.6 var(--serif);color:#30464d}
+  .rule{width:44pt;height:2pt;margin:9pt 0 12pt;background:var(--gold)}
+  .ledger{width:100%;border-collapse:collapse;margin:10pt 0;font:9pt/1.5 var(--serif)}
+  .ledger th{background:#122831;color:#f7f5ef;text-align:left;padding:5pt 7pt;font:700 7.5pt var(--sans);letter-spacing:.08em;text-transform:uppercase}
+  .ledger td{border-bottom:1px solid var(--line);padding:5pt 7pt;vertical-align:top}
+  .ledger tr:nth-child(even) td{background:#f4f6f2}
+  .tag{display:inline-block;padding:1pt 6pt;border-radius:2pt;font:700 7pt var(--sans);letter-spacing:.1em;text-transform:uppercase}
+  .tag.obs{background:#e6f0ed;color:#145451}
+  .tag.rep{background:#e3ecf5;color:#1c4568}
+  .tag.inf{background:#f3ecdd;color:#7a5a20}
+  .tag.mod{background:#efe6f2;color:#5d3a6b}
+  .tag.dis{background:#f7e4e0;color:#8a3b30}
+  .tag.unk{background:#eceae4;color:#4a5551}
+  .callout{margin:10pt 0;padding:8pt 10pt;border-left:3pt solid var(--teal);background:var(--teal-light);font:9.5pt/1.55 var(--serif)}
+  .callout strong{color:#145451}
+  .draft-status{margin:12pt 0;padding-top:8pt;border-top:1px dashed var(--line);font:9pt var(--sans);color:#52636b}
+  .badge{display:inline-block;padding:1pt 7pt;border-radius:2pt;font:700 7.5pt var(--sans);letter-spacing:.08em;text-transform:uppercase;margin-right:6pt}
+  .badge.outline{background:#f3ecdd;color:#7a5a20;border:1px solid #e0cfa5}
+  .badge.draft{background:#e6f0ed;color:#145451;border:1px solid #bcd8d2}
+  .badge.verified{background:#e3ecf5;color:#1c4568;border:1px solid #b7cfe3}
+  ul,ol{padding-left:18pt}
+  li{margin-bottom:4pt}
+  .toc ol{list-style:none;padding-left:0}
+  .toc li{margin-bottom:7pt}
+  .toc .tpart{font:700 9pt var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-top:10pt}
+  .toc a{color:var(--ink)}
+  .toc .count{color:var(--muted);font:8.5pt var(--sans);float:right}
+  .footnote{font:8.5pt var(--serif);color:#52636b}
+  .status-block{margin-top:14pt;padding:10pt 12pt;background:#f2efe7;border-left:3pt solid var(--gold)}
+  .status-block h3{font:700 9pt var(--sans);letter-spacing:.12em;text-transform:uppercase;margin:0 0 6pt;color:#7a5a20}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="mark">Draft Manuscript · v0.1</div>
+  <div>
+    <h1>The Skeptic</h1>
+    <p class="subtitle">A reader-led investigation of scientific claims, the evidence behind them, and the limits of what we can know.</p>
+  </div>
+  <div class="cover-meta">Twenty-five case files · Prologue to Epilogue</div>
+</div>
+
+<div class="titlepage">
+  <h1>The Skeptic</h1>
+  <p class="sub">A reader-led investigation of scientific claims, the evidence behind them, and the limits of what we can know</p>
+  <p class="author">The Skeptic</p>
+  <p class="ed">Draft manuscript v0.1 — prepared for review and final editing</p>
+</div>
+<section id="about">
+  <div class="eyebrow">Front matter</div>
+  <h2>About this book</h2>
+  <div class="rule"></div>
+  <p>This manuscript treats science the way a careful investigator treats a crime scene: not as a verdict that arrives already signed, but as a chain of observations, inferences, assumptions, and corrections that can be examined one link at a time.</p>
+  <p>The working method is simple and deliberate. Each chapter opens with a claim — a claim most people have encountered at least once, from "what the brain is doing when you dream" to "whether a particle exists." The chapter then reconstructs the path from raw observation to published interpretation, names the assumptions that made that path possible, and finally tests the interpretation against the best available counter-evidence.</p>
+  <p>The goal is not to leave the reader with a list of debunked ideas. The goal is to leave the reader with a <strong>method</strong> — a habit of asking where the evidence stops, what the inference assumes, and what would have to be true for the alternative to be right.</p>
+  <div class="callout"><strong>What "skeptic" means here.</strong> A skeptic is not a person who says "maybe" to everything. A skeptic is a person who tracks what the evidence can and cannot support, and who is willing to change the answer when the evidence changes.</div>
+</section>
+
+<section id="howtoread">
+  <div class="eyebrow">Front matter</div>
+  <h2>How to read this book</h2>
+  <div class="rule"></div>
+  <p>Each chapter follows the same internal structure so the reader can always locate where the argument stands:</p>
+  <ol>
+    <li><strong>The claim.</strong> A plain-language statement of what the chapter will investigate.</li>
+    <li><strong>The evidence chain.</strong> The observations, measurements, and prior results that feed the claim.</li>
+    <li><strong>The inference.</strong> The reasoning step that connects evidence to claim — where assumptions live.</li>
+    <li><strong>The alternative.</strong> What would be true if the claim were wrong, and what evidence we would expect to see.</li>
+    <li><strong>The ledger.</strong> A closing table that classifies each load-bearing element as observed, reproduced, inferred, modeled, disputed, or unknown.</li>
+  </ol>
+  <p>Readers who want the shortest version of any chapter can read the claim and the ledger and skip the middle. Readers who want the full method should read it in order, because the inference step is where the chapter's argument lives.</p>
+  <p>The chapters are organized into six parts. Parts I and II establish method and observation. Parts III and IV examine the sciences where inference carries the most weight. Parts V and VI move to uncertainty itself — what we can know when the evidence is thin, conflicting, or self-referential. The Epilogue returns to the reader with a short protocol for applying the method to claims encountered after the book ends.</p>
+</section>
+<section id="toc" class="toc">
+  <div class="eyebrow">Contents</div>
+  <h2>Table of contents</h2>
+  <div class="rule"></div>
+  <ol>
+    <li><span class="tpart">Front matter</span></li>
+    <li><a href="#about">About this book</a></li>
+    <li><a href="#howtoread">How to read this book</a></li>
+    <li><a href="#prologue">Prologue — The Case for a Case File</a> <span class="count">Ch 0</span></li>
+    <li><span class="tpart">Part I — Seeing</span></li>
+    <li><a href="#ch1">Chapter 1 — Seeing Is Not the Same as Knowing</a> <span class="count">Ch 1</span></li>
+    <li><a href="#ch2">Chapter 2 — What the Instruments Actually Measure</a> <span class="count">Ch 2</span></li>
+    <li><a href="#ch3">Chapter 3 — Reproduction, and Why It Is Harder Than It Looks</a> <span class="count">Ch 3</span></li>
+    <li><span class="tpart">Part II — Inferring</span></li>
+    <li><a href="#ch4">Chapter 4 — The Assumption Problem</a> <span class="count">Ch 4</span></li>
+    <li><a href="#ch5">Chapter 5 — Models, Maps, and the Territory</a> <span class="count">Ch 5</span></li>
+    <li><a href="#ch6">Chapter 6 — Probability Without Certainty</a> <span class="count">Ch 6</span></li>
+    <li><span class="tpart">Part III — Minds</span></li>
+    <li><a href="#ch7">Chapter 7 — What the Brain Does When It Dreams</a> <span class="count">Ch 7</span></li>
+    <li><a href="#ch8">Chapter 8 — Memory: A Reconstruction, Not a Recording</a> <span class="count">Ch 8</span></li>
+    <li><a href="#ch9">Chapter 9 — Consciousness and the Hard Inference</a> <span class="count">Ch 9</span></li>
+    <li><span class="tpart">Part IV — Matter</span></li>
+    <li><a href="#ch10">Chapter 10 — Does the Particle Exist?</a> <span class="count">Ch 10</span></li>
+    <li><a href="#ch11">Chapter 11 — The Standard Model, and What It Cannot Say</a> <span class="count">Ch 11</span></li>
+    <li><a href="#ch12">Chapter 12 — Gravity, Where the Equations Break</a> <span class="count">Ch 12</span></li>
+    <li><span class="tpart">Part V — Uncertainty</span></li>
+    <li><a href="#ch13">Chapter 13 — When the Evidence Is Thin</a> <span class="count">Ch 13</span></li>
+    <li><a href="#ch14">Chapter 14 — Conflicting Results, and How to Hold Them</a> <span class="count">Ch 14</span></li>
+    <li><a href="#ch15">Chapter 15 — Self-Reference: Science Checking Its Own Work</a> <span class="count">Ch 15</span></li>
+    <li><span class="tpart">Part VI — Knowing</span></li>
+    <li><a href="#ch16">Chapter 16 — Degrees of Belief</a> <span class="count">Ch 16</span></li>
+    <li><a href="#ch17">Chapter 17 — When a Field Changes Its Mind</a> <span class="count">Ch 17</span></li>
+    <li><a href="#ch18">Chapter 18 — The Skeptic's Protocol</a> <span class="count">Ch 18</span></li>
+    <li><span class="tpart">Back matter</span></li>
+    <li><a href="#epilogue">Epilogue — The Reader's Ledger</a> <span class="count">End</span></li>
+    <li><a href="#appendices">Appendices — Method Notes, Glossary, and Ledger Index</a> <span class="count">A–C</span></li>
+  </ol>
+  <p class="footnote">Note: the blueprint specifies twenty-five chapters across six parts. The remaining chapters in Parts I–VI follow the same case-file structure and will be slotted into this table as they are drafted.</p>
+</section>
+<section id="prologue" class="chapter">
+  <span class="casefile">Case file 0</span>
+  <div class="eyebrow">Prologue</div>
+  <h2>The Case for a Case File</h2>
+  <div class="rule"></div>
+  <p>Every investigation begins with something that was seen. A witness statement. A mark on the pavement. A number that does not fit the pattern. What separates a real investigation from an argument is what happens next: the investigator refuses to let the first impression stand unexamined, and instead assembles a record in which every link is labeled — what was observed, what was inferred, and what remains unknown.</p>
+  <p>This book is written in that style. It concerns a question that is usually asked casually, and here I want to ask it carefully: what do we actually know, about the world outside our minds and about the machinery of the world itself, and how well do we know it? Not "do we know anything?" — skepticism in that form is not a position but a mood. The question worth answering is graded: on each claim we hold, how much evidence stands behind it, what assumptions are doing load-bearing work, and what would have to be true for the claim to be wrong?</p>
+  <p>Two audiences keep getting confused about each other, so a warning is in order. The skeptic is not the person who says "that can't be true," and the believer is not the person who says "the science is settled." A claim's strength is a matter of its evidence, and the evidence is a matter of record. The skeptic's tool is not dismissal but the ledger: a written account of what is measured, what is modeled, and what is simply carried forward because no better alternative has been built.</p>
+  <p>Why the case-file format? Because most disputes about science are not really disputes about the findings. They are disputes about what the findings establish. "The experiment was performed" and "the conclusion follows" are two different statements, and the gap between them is where the whole book lives. In each chapter I will therefore close with an evidence ledger: a table with three columns — Observed, Inferred, and Unknown. Observed is what the instruments or witnesses actually delivered. Inferred is what the interpretation added. Unknown is what the claim still requires that has not yet been shown.</p>
+  <p>I will use the ledger on big claims — quarks, the Standard Model, general relativity — and on smaller, more human ones — whether a witness's memory is reliable, whether a dream reports anything real. The format forces the same discipline onto both, which is the point: skepticism should scale. A claim about the Higgs boson and a claim about what a neighbor saw on a dark street should each be held to the standard that its specific evidence can support, no more, no less.</p>
+  <p>One more convention before the first file opens. When I say "we know" I mean "the scientific community has built a body of mutually supporting measurements, and no available alternative predicts the observations as well." When I say "we do not know" I mean "there is a live question, and I will tell you what the live question is and what would answer it." You will see that the boundary is far more productive than either a shrug or a shrill correction. The honest map of knowledge is neither the blank sheet the skeptic prefers nor the finished atlas the enthusiast prefers. It is a chart with surveyed regions, and coastlines that are themselves survey findings — real, useful, and revisable.</p>
+</section>
+<section class="part-divider">
+  <div class="partnum">Part I</div>
+  <h1>Seeing</h1>
+  <p class="epigraph">The first act of evidence is not belief. It is the description of what arrived, and of what that means — and what it does not.</p>
+</section>
+<section id="ch1" class="chapter">
+  <span class="casefile">Case file 1</span>
+  <div class="eyebrow">Part I · Seeing</div>
+  <h2>Seeing Is Not the Same as Knowing</h2>
+  <div class="rule"></div>
+  <p>There is a sentence in every witness statement that is quietly doing more work than the writer knows: "I saw." It presents an event as delivered, complete, and independent of the seeing. The physics and the psychology of the eye and the brain agree on one uncomfortable point — that is not what happened. What happened is a long chain of transformations, and every link of the chain added something. The eye did not record the scene. It sampled it, compressed it, and handed a partial, biased summary to a brain that then had to fill the gaps.</p>
+  <p>Start at the front of the chain, because this is where the popular picture of vision is wrong. The retina is not a photographic film. It is a processor. Before a single signal leaves the eye, it has already been edited: it has been contrast-enhanced, edge-detected, and, crucially, it has been sampled at a resolution that varies wildly across the image. The center of your gaze — the fovea — is packed with cone cells dense enough to read the fine print. A few hundred degrees off that center, in the visual periphery, the sampling is so coarse that the eye there is functionally a crude motion detector, good at telling you something moved, and bad at telling you what it was.</p>
+  <p>So even before interpretation, "what you saw" is not the scene. It is a map whose detail is graded by where you were looking, and whose content has already been sharpened where it matters to attention and flattened where it does not. A witness describing the driver's face while tracking a car three lanes over is describing a high-resolution region and a low-resolution one with a single verb. The verb hides the resolution mismatch. That mismatch, not malice, is the first source of error in most of the sightings that will occupy the pages ahead.</p>
+  <p>And the eye is not done with its edits. It throws away light. It cannot distinguish the dim red glow of a distant vehicle from the blue haze of the far sky when they both fall below its sensitivity floor, and in the dark it leans almost entirely on rod cells that see no color at all. Night vision is, literally, colorless vision. The confident "it was red" in a low-light description is often the brain re-coloring a monochrome signal after the fact, not the eye reporting what it measured. I am not saying the witness is wrong. I am saying the word "saw" has crossed at least two boundaries — the sampling boundary and the color boundary — and each crossing changed the data.</p>
+  <p>Now the signal reaches the brain, and the brain does the thing that makes "seeing" the most misleading verb in the book. It does not decode. It guesses. The visual system is built on the assumption — learned across a lifetime — that the world is continuous, occluding, lit from above, and roughly predictable. A face in a crowd is not assembled from pixels; it is recognized as a face, and then the pixels are filled in to match. A hand emerging from a sleeve has its hidden knuckles supplied by the prior. This is called, in the field, predictive processing, and it is not a bug. It is the reason you can read a line of text at all: your fovea lands on every other word, and the brain completes the rest. Vision is a reconstruction guided by expectation, and a reconstruction is only as reliable as the expectations behind it.</p>
+  <p>That is the hinge of the whole book in miniature. A perception is not a copy of the world; it is the best guess the system could make from a partial sample, under time pressure, using priors it never showed you. The guess is usually correct, which is why it feels like a copy. The times it is not — a dark figure read as a person, a cloud read as a shape, a stranger's face read as a familiar one — the error has the exact texture of a direct observation. You cannot feel the difference between a copy and a confident reconstruction, because the feeling is the same. That is why "I saw" is not evidence of what was there. It is evidence of what the system found plausible enough to supply.</p>
+    <p>That chain does not stop at the moment of seeing. Every time an event is recalled, it runs forward again in the same direction, with the same priors, over the same compressed, graded summary. A witness asked a second time to describe the driver's face is not retrieving a stored image; the original was never a stored thing. The face is re-completed from plausibility, using the same expectations that filled in the knuckles the first time. A memory of a scene is, in the same sense, not evidence of the scene. It is the same process, run again, and each run is indistinguishable from the one before, because there is no original to be indistinguishable from.</p>
+    <p>Attention decides, in the first place, which regions receive the fine sampling that memory later has to re-complete. You cannot remember the resolution of the periphery, because it was never there at the resolution you are now trying to remember it at. Attention selects a narrow slice of the world for high-fidelity encoding, and everything outside that slice survives as a low-fidelity shadow. So perception, attention, and memory agree on one point: what you can later report is a thin, selected slice, completed twice &mdash; once in seeing, and once in recalling &mdash; and each completion is a guess you cannot separate from the data that prompted it. That is the full architecture behind &ldquo;I saw,&rdquo; and it is the standard this book holds, in every chapter that follows, against every claim.</p>
+    <div class="rule"></div>
+    <h3>The evidence ledger</h3>
+    <p class="chapter-brief">What this chapter has established, what it has added, and what it still needs.</p>
+    <table class="ledger">
+      <thead>
+        <tr><th>Observed</th><th>Inferred</th><th>Unknown</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag obs">observed</span><br>The signal at the retina: graded sampling (foveal high, peripheral low), contrast and edge processing, color lost at low light. A partial, biased summary &mdash; never the scene itself.</td>
+          <td>&mdash;</td>
+          <td><span class="tag unk">unknown</span><br>What lay below the sensitivity floor and was never encoded; the scene before compression.</td>
+        </tr>
+        <tr>
+          <td>&mdash;</td>
+          <td><span class="tag inf">inferred</span><br>Object completion (faces, hidden knuckles) and the recoloring of a monochrome glow as &ldquo;red&rdquo; by a learned prior.</td>
+          <td><span class="tag unk">unknown</span><br>How much of the reported detail came from the signal and how much from the prior &mdash; a split the witness cannot see or state.</td>
+        </tr>
+        <tr>
+          <td><span class="tag obs">observed</span><br>The claim &ldquo;I saw&rdquo; &mdash; presented as delivered, complete, independent of the perceiving.</td>
+          <td><span class="tag inf">inferred</span><br>The best guess the system could make under time pressure, using priors it never reveals.</td>
+          <td><span class="tag unk">unknown</span><br>The match between the reconstruction and what was actually there &mdash; the difference the perceiver cannot feel.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="chapter" id="chapter-2">
+    <span class="casefile">Case file 2</span>
+    <div class="eyebrow">Part I &middot; Measurement</div>
+    <h2>What the Instruments Actually Measure</h2>
+    <div class="rule"></div>
+    <p class="lead">If the eye is a sensor that reports a summary, the question that follows is what happens when we hand the summary to a machine &mdash; and what the machine, in turn, reports back to us.</p>
+    <p>In Chapter 1 we established that the eye is not a camera: it grades its own sampling, throws away most of the scene, and then the brain supplies the rest. The obvious response to that finding is that we should replace the eye with a better sensor, a camera or a scanner, and let the machine do the seeing. The next four chapters are an argument that this response is the most common mistake in the history of measurement. A better sensor does not remove the interpretive step; it relocates it. It moves the guess from the brain to the calibration, the model, and the operator, and then it labels the result with the word &ldquo;measured,&rdquo; which does the work the eye was never trusted to do on its own. The instrument does not see. It converts one signal into another, according to rules we set, and reports a number that is as much a reconstruction of our rules as it is a property of the world.</p>
+    <p>Consider what an instrument actually does, link by link, because the word &ldquo;measures&rdquo; hides a pipeline. A spectrometer does not find the chemical composition of a sample. It measures a current, at a moment, through a detector whose sensitivity is itself a number someone chose and wrote into a calibration file. It then converts that current into a wavelength, using a model of the optics that was fit to other measurements, under other conditions, by other hands. It then reports a peak, and the peak is called a signature, and the signature is compared to a library, and the library was built by people who had already decided what the signatures of known substances look like. At no point in the chain did the substance announce itself. At every point a human decision was folded into the output, and the word &ldquo;measured&rdquo; at the end is a receipt for a process no one is now going to audit.</p>
+    <p>The calibration is the quietest inference in this book, and the one most likely to be trusted. A calibration is a statement that this instrument&rsquo;s response corresponds to some other instrument&rsquo;s response, at some reference point, on some date. It is a bet that the world between those two dates behaved the same way. When the bet is right, the word &ldquo;calibrated&rdquo; is deserved. When it is wrong&mdash;when the reference has drifted, when the temperature moved, when the reference standard itself was only ever an approximation&mdash;the error is invisible, because the instrument still returns a clean number. This is the failure mode that separates measurement from observation. A witness who guesses wrong at least looks uncertain. A miscalibrated instrument that is guessing wrong reports to six decimal places, and that precision is mistaken for accuracy, and the mistake propagates downstream into every decision that used the number.</p>
+    <p>Take the thermograph, because it is where the argument gets its teeth. An infrared camera reports a temperature of a surface, and &ldquo;temperature of a surface&rdquo; is already an inference, because a surface does not have a temperature in the way a pot of boiling water does. What the sensor sees is radiant energy in a band of the spectrum, and to call that a temperature it must assume an emissivity. Emissivity is how well a surface emits the band the sensor is looking at, and it is not a fixed property of the material in the way the textbook suggests. It is a property of the surface as it is, at that moment, in that state, under that lighting, at that angle, against that background. A rusted panel and a painted panel of the same metal have different emissivities. The same painted panel, wet, has a different emissivity. The same dry panel, viewed at a steep angle against a hot background, reports a different number than it reports at a shallow angle against a cold one.</p>
+    <p>Behind the emissivity sits the model, and this is where measurement becomes indistinguishable from simulation. To convert the radiant signal the sensor received into a temperature the camera runs a model of the scene: what it assumes about the reflectivity of the surroundings, what it assumes about the emissivity of the target, what it assumes about the path of the radiation between them. The model is a story about the scene, and it is the camera&rsquo;s story, not the scene&rsquo;s. When the story is wrong, the temperature is wrong, and the wrongness is silent. A thermograph does not hand you a reading with a flag. It hands you a number. The number is the model wearing the clothes of a fact, and it is your job, the one the instrument was never designed to do, to know which.</p>
+    <p>So the argument of this chapter, and the argument the case files that follow will keep testing, is not that instruments lie. That is too dramatic a word and it misses the point. The argument is that instruments are honest only about their own outputs, and that their outputs are inferences, and that an inference is as defensible as the assumptions that built it, and that the assumptions are rarely written down, rarely dated, rarely tested, and rarely the same as the assumptions anyone else made. A number in a report is a claim dressed in the clothing of a reading. Skepticism is not the refusal to read it. Skepticism is the insistence that before we decide what the world is doing, we first establish what the instrument was told to do, and then we establish whether that instruction was still true when the reading was taken.</p>
+    <div class="callout">
+      <strong>The move to keep.</strong> When a measurement appears in evidence, before you ask what it says, ask what it was built to say. Every instrument is a claim generator, not a fact reader. The claim it generates is only as reliable as the assumptions that were never printed on the page next to it, and the skeptic&rsquo;s first job is to pull those assumptions back out of the silence.</div>
+    <div class="rule"></div>
+    <h3>The evidence ledger</h3>
+    <p class="chapter-brief">This case file is deliberately partial. What follows is the honest ledger of the chapter itself: what was observed, what was inferred, and what is still unknown. The ledger is the discipline. It is what separates a case that has been examined from a case that has only been told.</p>
+    <table class="ledger">
+      <thead>
+        <tr>
+          <th>Observed</th>
+          <th>Inferred</th>
+          <th>Unknown</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A sensor returns a signal; the signal has a value, a unit, and a timestamp.</td>
+          <td>That the signal corresponds to a quantity in the world at all.</td>
+          <td>Whether the mapping from signal to quantity held at the moment in question.</td>
+        </tr>
+        <tr>
+          <td>The report contains a number and a label.</td>
+          <td>That the label names the quantity the number is being taken to represent.</td>
+          <td>The assumptions written into the label, and the date they were last validated.</td>
+        </tr>
+        <tr>
+          <td>A calibration record exists for the instrument.</td>
+          <td>That the reference it was calibrated against was itself a faithful standard.</td>
+          <td>Whether drift, contamination, or a changed environment broke the link after calibration.</td>
+        </tr>
+        <tr>
+          <td>The model the instrument runs is documented.</td>
+          <td>That the model&rsquo;s assumptions describe the scene that was actually measured.</td>
+          <td>Which assumptions are load-bearing, and which of them were false for this specific case.</td>
+        </tr>
+        <tr>
+          <td>Another instrument, run independently, returns a different number.</td>
+          <td>That one of the two chains of inference is wrong, or that both are.</td>
+          <td>Which step in either chain introduced the disagreement.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>That is the hinge of this chapter. What an instrument measures is not a fact. What an instrument measures is a fact plus a stack of assumptions, each of which is a guess in exactly the sense the word took in Chapter 1, and most of which the operator never sees. The job of the skeptic is not to distrust the instrument. It is to inventory the stack, to name each assumption, and to decide which of them the current claim is resting on. Every subsequent chapter in this book is that inventory, run against a different instrument and a different domain. This chapter is the template.</p>
+  </section>
+</body>
+</html>

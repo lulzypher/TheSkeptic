@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 5 — The Skeptic</title>
+<style>
+:root {
+  --ink: #1a1a1a;
+  --ink-soft: #444;
+  --paper: #fdfdfb;
+  --line: #e3e0d8;
+  --accent: #8a1f2d;
+  --ok-bg: #eef4ee;
+  --ok-line: #3d6b47;
+  --open-bg: #faf1e6;
+  --open-line: #b0742a;
+}
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; font-size: 18px; line-height: 1.75; }
+main { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+h1 { font-size: 2.4rem; line-height: 1.15; margin: 0 0 1.5rem; letter-spacing: -0.01em; }
+h2 { font-size: 1.5rem; margin: 2.75rem 0 1rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--line); }
+h3 { font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+p { margin: 0 0 1.25rem; }
+.lede { font-size: 1.15rem; color: var(--ink-soft); border-left: 3px solid var(--accent); padding-left: 1.1rem; margin-bottom: 2.25rem; }
+table.ledger { width: 100%; border-collapse: collapse; margin: 1.75rem 0; font-size: 0.95rem; line-height: 1.5; }
+table.ledger th { text-align: left; background: #f4f2ec; border-bottom: 2px solid var(--ink); padding: 0.65rem 0.8rem; font-family: Verdana, Geneva, sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
+table.ledger td { border-bottom: 1px solid var(--line); padding: 0.75rem 0.8rem; vertical-align: top; }
+.status { border-radius: 6px; padding: 1.1rem 1.3rem; margin: 1.75rem 0; font-size: 0.98rem; line-height: 1.65; }
+.status.ok { background: var(--ok-bg); border-left: 4px solid var(--ok-line); }
+.status.open { background: var(--open-bg); border-left: 4px solid var(--open-line); }
+.status strong.tag { display: block; font-family: Verdana, Geneva, sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.45rem; }
+.status.ok strong.tag { color: var(--ok-line); }
+.status.open strong.tag { color: var(--open-line); }
+.exercise { background: #f7f5ef; border: 1px solid var(--line); border-radius: 8px; padding: 1.5rem 1.6rem; margin: 2.25rem 0; }
+.exercise h3 { margin-top: 0; }
+ol li, ul li { margin-bottom: 0.7rem; }
+code, .mono { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.88em; background: #f1efe8; padding: 0.1em 0.4em; border-radius: 4px; }
+.verdict { margin-top: 3rem; padding-top: 1.75rem; border-top: 2px solid var(--ink); }
+.verdict h3 { font-family: Verdana, Geneva, sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-top: 0; }
+footer { margin-top: 4rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--ink-soft); }
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Chapter 5 — The Clock in the Rock</h1>
+
+<p class="lede">
+A headline reads: <em>Earth is 4.54 billion years old.</em> Somewhere in a lab, a machine
+called a mass spectrometer did not read that sentence. It read a ratio — how many atoms of
+lead-206 sit next to how many atoms of uranium-238 in a grain the size of a dust mite's
+fingernail. The distance between that ratio and the sentence is the same distance we
+crossed in Chapter 1, and this chapter is where the book shows that the distance is
+measurable, auditable, and — most of the time — already crossed.
+</p>
+
+<h2>The claim on the table</h2>
+
+<p>
+The contested row this chapter audits is not one sentence but a family of them: the
+Earth is 4.54 billion years old, the oldest zircons are over 4.4 billion years old, this
+basalt is 3.1 billion years old, those corals are 120,000 years old. Radiometric dating
+is the method that turned deep time from a metaphor into a number, and it is also the
+method most often accused of being circular — of assuming the age of the Earth in order
+to measure the age of the Earth. The accusation is wrong in a specific, checkable way,
+and checking it is the exercise of this chapter.
+</p>
+
+<h2>What the instrument actually returns</h2>
+
+<p>
+A decay clock works like this. A parent isotope — say <span class="mono">²³⁸U</span> —
+decays to a daughter isotope, <span class="mono">²⁰⁶Pb</span>, at a fixed rate called
+the decay constant. The more time that passes, the more daughter accumulates, and the
+relationship is exponential, not linear:
+<span class="mono">D/P = e<sup>λt</sup> − 1</span>. The spectrometer counts atoms of
+parent and daughter. It returns two ratios and an uncertainty on each. It does not
+return years. Years are what you get after the model does its work, and the model
+needs three assumptions that a headline never prints:
+</p>
+
+<ul>
+<li><strong>The system stayed closed.</strong> No parent got in, no daughter got out. If lead leaked away, the grain is younger than its atoms claim to be — not wrong, just a record of a later event.</li>
+<li><strong>The initial daughter is known.</strong> Rock often inherits "common" lead that was not made by decay. The model subtracts it using a third isotope, <span class="mono">²⁰⁴Pb</span>, which has no radioactive source. That subtraction is a model assumption with a named check.</li>
+<li><strong>The decay constant is right.</strong> This is the one the skeptics usually attack, because if λ is a guess, the clock is a guess. It is not. Decay constants are measured directly, in the lab, by counting decays over time — not derived from the age of the Earth. The circularity charge reverses the direction of the evidence.</li>
+</ul>
+
+<h2>The audit ledger</h2>
+
+<table class="ledger">
+<thead>
+<tr>
+<th>Claim</th>
+<th>Instrument</th>
+<th>Assumptions</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth is 4.54 ± 0.05 billion years old</td>
+<td>U-Pb and Pb-Pb on zircons; Rb-Sr and Sm-Nd on whole meteorites</td>
+<td>Closed system since crystallization; initial Pb modelled via <span class="mono">²⁰⁴Pb</span>; lab-measured decay constants</td>
+<td><span class="status ok" style="display:inline;padding:0.1rem 0.5rem;border-radius:4px;">verified cross-checked</span></td>
+</tr>
+<tr>
+<td>Oldest Earth zircons (Jack Hills) are ~4.4 billion years</td>
+<td>U-Pb by SIMS and laser ablation ICP-MS on single grains</td>
+<td>Grain remained closed after its first crystallization event</td>
+<td><span class="status ok" style="display:inline;padding:0.1rem 0.5rem;border-radius:4px;">verified</span></td>
+</tr>
+<tr>
+<td>"Radiometric dating assumes the age it measures" (circularity)</td>
+<td>Decay-constant measurements (counting decays over time, e.g. <span class="mono">²³²Th</span> measured to ~10⁻¹⁸ s⁻¹ precision)</td>
+<td>—</td>
+<td><span class="status ok" style="display:inline;padding:0.1rem 0.5rem;border-radius:4px;">rejected</span></td>
+</tr>
+<tr>
+<td>Any single rock sample is a definitive age</td>
+<td>One ratio, one closed-system check</td>
+<td>Sample is unaltered; inherited daughter fully corrected</td>
+<td><span class="status open" style="display:inline;padding:0.1rem 0.5rem;border-radius:4px;">open — sample-specific</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="status ok">
+<strong class="tag">Verified and cross-checked</strong>
+The age of the Earth is not one lab's result. Independent systems — uranium-lead,
+rubidium-strontium, samarium-neodymium — started on different materials, were measured
+in different labs, and converge on the same number within error bars. A clock
+confirmed by three independent watches is not circular; it is redundant, which is what
+you want in an audit.
+</div>
+
+<div class="status open">
+<strong class="tag">Open — this is a real problem, not a gotcha</strong>
+Every single sample can lie. Hydrothermal fluids reset clocks; metamorphism blends
+two ages into one; inherited zircons carry a memory of older rocks. Geochronologists
+have a name for a grain that has been open and call it a "reservoir," and the skill of
+the field is separating a real age from a real but wrong event. That is why honest
+papers report concordia diagrams — plots where a closed system lands on a curve and a
+leaky one doesn't — and why a single number without that plot is a headline, not a
+result.
+</div>
+
+<h2>The cross-checks that make it not-circular</h2>
+
+<p>
+Three independent lines of evidence all point at the same 4.5-billion-year number, and
+none of them can be fudged to fit the others:
+</p>
+
+<ol>
+<li><strong>Meteorites.</strong> The oldest objects we can date are chondrites, and their isotopic clocks all stop at 4.567 billion years. The Earth formed in that window; if it were younger or older, the meteorites would be the ones out of line, not our planet.</li>
+<li><strong>Layer-cake time.</strong> Deep-time geology — the stacking order of rock layers, the fossil record inside them, the fit of continental plates — gives an ordering of events. Radiometric dates, dropped onto that stack, fall in order. A clock that agrees with a sequence it was never told is a clock that is being read, not one that is being fed.</li>
+<li><strong>Physics on paper.</strong> Decay constants have been measured by direct counting for more than a century, and experiments that stress them — extreme fields, chemistry, temperature — find no change. You do not need to know the age of the universe to know how fast <span class="mono">²³⁸U</span> decays; you need a counter and a stopwatch.</li>
+</ol>
+
+<h2>What a careful reader looks for</h2>
+
+<p>
+When a dating headline lands on your desk, the audit has three steps. First: which
+isotope system, and was it concordant? A U-Pb age that sits on the concordia curve is a
+different claim from one that does not, and papers that skip the curve are skipping the
+proof. Second: was the initial-daughter correction shown? If a study claims a precise
+age but never reports the <span class="mono">²⁰⁴Pb</span> value or the isochron
+regression, the model did more work than it disclosed. Third: do the dates agree with
+the rock's own story — its texture, its chemistry, its place in the geological record?
+A number that contradicts the rock is a number about a later event, and that is
+legitimate science, just not the headline it is wearing.
+</p>
+
+<div class="exercise">
+<h3>Exercise — read a concordia plot</h3>
+<p>
+Find the paper for the Jack Hills zircon result (Wilde et al., 2001,
+<i>Nature</i>). Do not ask "does it say 4.4 billion?" Ask instead:
+</p>
+<ol>
+<li>Does the figure show a concordia curve, and where do the data points fall relative to it?</li>
+<li>Does the report list a <span class="mono">²⁰⁴Pb</span> correction or an isochron, or does it state a ratio and let you do the algebra?</li>
+<li>What would you have to see in that plot — points off the curve, a discordance line, a missing correction — for you to downgrade "age of the rock" to "age of the last reset event"?</li>
+</ol>
+<p>
+The point is not the number 4.4. The point is that you can now name the difference
+between a claim and the evidence that earns it.
+</p>
+</div>
+
+<div class="verdict">
+<h3>Verdict</h3>
+<p>
+The 4.54-billion-year age of the Earth is <strong>verified and cross-checked</strong>:
+measured by instruments that return atom ratios, modelled with assumptions each of
+which has its own independent test, and confirmed by at least three isotope systems
+and a century of direct decay-constant physics. The circularity charge fails — decay
+constants are inputs, not outputs. What remains <strong>open</strong> is exactly what
+geochronology itself flags: any single sample can record an event later than the rock
+itself, and the discipline's answer to that is the concordia plot, the isochron, and
+the honest sentence "this is the age of the last closed-system event, not necessarily
+the age of first crystallization." That sentence is the fingerprint of a field that
+audits itself.
+</p>
+</div>
+
+<footer>
+<p>Chapter 5 — The Skeptic · source: <a href="../../Map/radiometric-dating.md">radiometric-dating.md</a> · <a href="01-chapter1.html">Chapter 1</a> · <a href="00-prologue.html">Prologue</a></p>
+</footer>
+
+</main>
+</body>
+</html>
+
+
+

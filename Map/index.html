@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TheSkeptic · Map</title>
+<style>
+:root {
+  --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2d3a4d;
+  --text:#d6e0f0; --dim:#8b99b0; --accent:#58a6ff;
+  --green:#3fb950; --amber:#d29922; --red:#f85149;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text);
+  font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+.wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
+header { padding:28px 0 20px; border-bottom:1px solid var(--border); margin-bottom:24px; }
+h1 { margin:0 0 6px; font-size:1.5rem; letter-spacing:-0.01em; }
+h1 .dot { color:var(--dim); }
+.sub { color:var(--dim); font-size:0.92rem; margin:0 0 12px; }
+.badge { display:inline-block; background:var(--panel2); border:1px solid var(--border);
+  color:var(--accent); font-family:var(--mono); font-size:0.72rem; letter-spacing:0.06em;
+  padding:3px 10px; border-radius:20px; margin:0 8px 6px 0; }
+.badge.green { color:var(--green); }
+.badge.amber { color:var(--amber); }
+.progress-card { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:18px 22px; margin-bottom:22px; }
+.progress-head { display:flex; justify-content:space-between; font-size:0.9rem; color:var(--dim); margin-bottom:8px; }
+.progress-head b { color:var(--text); font-family:var(--mono); }
+.bar { height:8px; background:var(--panel2); border-radius:4px; overflow:hidden; }
+.bar .fill { height:100%; background:linear-gradient(90deg,#58a6ff,#3fb950); border-radius:4px; }
+.branch-head { display:flex; justify-content:space-between; font-size:0.88rem; color:var(--dim); margin-top:14px; margin-bottom:6px; }
+.branch-head b { font-family:var(--mono); color:var(--text); }
+section { margin-bottom:26px; }
+.card { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:20px 22px; }
+h2 { margin:0 0 6px; font-size:1.05rem; }
+.card .note { color:var(--dim); font-size:0.86rem; margin-bottom:16px; }
+.sec-block { margin-bottom:18px; }
+.sec-head { margin-bottom:8px; display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+.sec-num { font-family:var(--mono); font-size:0.8rem; color:var(--accent); background:var(--panel2);
+  border:1px solid var(--border); padding:2px 9px; border-radius:14px; }
+.sec-note { color:var(--dim); font-size:0.84rem; width:100%; margin:-4px 0 0 0; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:10px; }
+.node { display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border:1px solid var(--border);
+  border-radius:9px; background:var(--panel2); }
+.node .tick { flex:0 0 auto; width:20px; height:20px; border-radius:50%; display:grid; place-items:center;
+  font-size:0.7rem; margin-top:2px; }
+.node.done { border-color:#2a4d33; background:#14241b; }
+.node.done .tick { background:var(--green); color:#0d1117; }
+.node.draft { border-color:#4d3f1c; background:#211d12; }
+.node.draft .tick { background:var(--amber); color:#0d1117; }
+.node.planned { border-color:var(--border); background:var(--panel2); }
+.node.planned .tick { background:#24344a; color:var(--accent); }
+.node .title { font-size:0.92rem; font-weight:600; }
+.node .desc { font-size:0.8rem; color:var(--dim); margin-top:2px; }
+.node .num { font-family:var(--mono); font-size:0.72rem; color:var(--dim); }
+.empty { color:var(--dim); font-size:0.85rem; padding:2px 0 2px 4px; }
+.branches { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; }
+.branch { border:1px solid var(--border); border-radius:10px; padding:14px 16px; background:var(--panel2); }
+.branch b { font-size:0.95rem; }
+.branch .why { font-size:0.82rem; color:var(--dim); margin:6px 0; }
+.callout { padding:12px 16px; border-left:3px solid var(--accent); background:#131c2b; border-radius:0 8px 8px 0; font-size:0.9rem; margin:0 0 8px; }
+.callout.green { border-color:var(--green); background:#12261e; }
+.callout.amber { border-color:var(--amber); background:#262112; }
+.mono { font-family:var(--mono); font-size:0.88em; background:var(--panel2); border:1px solid var(--border); border-radius:5px; padding:1px 6px; }
+footer { color:var(--dim); font-size:0.85rem; text-align:center; margin-top:36px; }
+footer a { color:var(--accent); text-decoration:none; margin:0 8px; }
+footer a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>TheSkeptic <span class="dot">·</span> Map</h1>
+  <p class="sub">Working maps for the manuscript — rendered from the single source of truth, <span class="mono">Map/data.js</span>. No hard-coded topic lists.</p>
+  <div id="badges"></div>
+</div></header>
+<div class="wrap">
+
+  <div class="progress-card" id="progress"></div>
+
+  <section><div class="card">
+    <h2>Manuscript structure</h2>
+    <div class="note">Sections from <span class="mono">MANUSCRIPT_DATA.structure</span>, topics from <span class="mono">MANUSCRIPT_DATA.topics</span>. Each topic card carries its status.</div>
+    <div id="toc"></div>
+  </div></section>
+
+  <section><div class="card">
+    <h2>Branches</h2>
+    <div class="branches" id="branches"></div>
+  </div></section>
+
+  <section><div class="card">
+    <h2>Status taxonomy</h2>
+    <div id="taxonomy"></div>
+  </div></section>
+
+  <footer>
+    <a href="debate.html">Debate map →</a><a href="map.html">Dependency map →</a><a href="progress.html">Progress report →</a>
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  var D = window.MANUSCRIPT_DATA;
+  if (!D) {
+    document.body.insertAdjacentHTML('afterbegin', '<div style="padding:16px;text-align:center;color:#f85149">Map/data.js not found — nothing to render.</div>');
+    return;
+  }
+  var esc = function (s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  };
+  var tickFor = function (st) { return st === 'done' ? '✓' : st === 'draft' ? '…' : '○'; };
+  var done = D.topics.filter(function (t) { return t.status === 'done'; }).length;
+  var major = D.chapters.filter(function (c) { return c.type === 'chapter'; }).length;
+
+  // Header badges
+  document.getElementById('badges').innerHTML =
+    '<span class="badge green">' + done + '/' + D.topics.length + ' TOPICS WRITTEN</span>' +
+    '<span class="badge">' + D.chapters.length + ' CHAPTERS MAPPED</span>' +
+    '<span class="badge amber">' + major + ' MAJOR CHAPTERS</span>' +
+    '<a class="badge" href="debate.html">DEBATE MAP →</a>';
+
+  // Progress card
+  var pct = Math.round(done / D.topics.length * 100);
+  var prog = '<div class="progress-head"><span>Topics written — full manuscript</span><b>' +
+    done + ' / ' + D.topics.length + ' (' + pct + '%)</b></div>' +
+    '<div class="bar"><div class="fill" style="width:' + Math.max(pct, 3) + '%"></div></div>';
+  D.branches.forEach(function (b) {
+    var bd = D.topics.filter(function (t) { return t.branch === b.id; }).length;
+    prog += '<div class="branch-head"><span>' + esc(b.id) + ' — ' + esc(b.title) +
+      '</span><b>' + bd + ' topics</b></div>';
+  });
+  document.getElementById('progress').innerHTML = prog;
+
+  // Structure — driven by D.structure (IDs "1"–"6"), not D.chapters order
+  var toc = '';
+  D.structure.filter(function (s) {
+    var n = parseInt(s.id, 10);
+    return n >= 1 && n <= 6;
+  }).forEach(function (s) {
+    var secs = D.topics.filter(function (t) { return t.section === s.id; });
+    var sd = secs.filter(function (t) { return t.status === 'done'; }).length;
+    toc += '<div class="sec-block"><div class="sec-head">' +
+      '<span class="sec-num">' + esc(s.id) + '</span>' +
+      '<b>' + esc(s.title) + '</b>' +
+      ' <span style="color:var(--dim);font-size:0.82rem">' + sd + '/' + secs.length + ' written</span>' +
+      (s.note ? '<div class="sec-note">' + esc(s.note) + '</div>' : '') +
+      '</div>';
+    if (secs.length) {
+      toc += '<div class="grid">' + secs.map(function (t) {
+        return '<div class="node ' + t.status + '"><span class="tick">' + tickFor(t.status) +
+          '</span><div><div class="title">' + esc(t.title) + '</div>' +
+          '<div class="desc">' + esc(t.desc) + ' · <span class="num">' + esc(t.section) +
+          ' · ' + esc(t.status) + '</span></div></div></div>';
+      }).join('') + '</div>';
+    }
+    toc += '</div>';
+  });
+  document.getElementById('toc').innerHTML = toc;
+
+  // Branches
+  document.getElementById('branches').innerHTML = D.branches.map(function (b) {
+    var color = b.status === 'done' ? '#2a4d33' : b.status === 'draft' ? '#4d3f1c' : 'var(--border)';
+    return '<div class="branch" style="border-color:' + color + '">' +
+      '<b>' + esc(b.id) + ' · ' + esc(b.title) +
+      ' <span class="num" style="font-weight:400">[' + esc(b.status) + ']</span></b>' +
+      '<p class="why">' + esc(b.why) + '</p>' +
+      '<div style="font-size:0.82rem;color:var(--dim)">' + esc(b.notes) + '</div></div>';
+  }).join('');
+
+  // Taxonomy
+  document.getElementById('taxonomy').innerHTML = D.statusTaxonomy.map(function (s, i) {
+    var cls = i === 0 ? 'green' : i === 1 ? 'amber' : '';
+    return '<div class="callout ' + cls + '"><b>' + esc(s[0]) + '</b> — ' + esc(s[1]) + '</div>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

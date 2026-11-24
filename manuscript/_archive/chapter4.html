@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The Skeptic: a reader-led investigation of scientific claims, evidence, assumptions, and uncertainty. Draft manuscript v0.1.">
+<title>Chapter 4 — Flat Here, Curved There? | The Skeptic</title>
+<style>
+  :root{
+    --ink:#17242c; --muted:#52636b; --paper:#fbfaf7; --teal:#176b68;
+    --teal-light:#e6f0ed; --gold:#c28a3b; --line:#d8ded9; --navy:#122831;
+    --serif:Georgia,"Times New Roman",serif; --sans:"Aptos","Segoe UI",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  @page{ size:A5; margin:16mm 15mm 18mm; @bottom-center{content:counter(page); font:8pt var(--sans); color:#52636b} }
+  @page cover{ margin:0; background:#10232c; @bottom-center{content:""} }
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font:10.5pt/1.72 var(--serif)}
+  a{color:var(--teal);text-decoration:none}
+  h1,h2,h3{color:var(--navy);font-family:var(--serif)}
+  p{margin:.45rem 0 .9rem}
+  .cover{page:cover;min-height:190mm;padding:24mm 14mm;display:flex;flex-direction:column;justify-content:space-between;color:#f7f5ef;
+    background:radial-gradient(ellipse at 82% 28%, rgba(39,130,123,.46), transparent 36%),linear-gradient(135deg,#10232c,#183d45 68%,#10232c)}
+  .cover .mark{color:#c4d9d2;font:700 9pt var(--sans);letter-spacing:.22em;text-transform:uppercase}
+  .cover h1{margin:18mm 0 6mm;font:500 44pt/.92 var(--serif);letter-spacing:-.04em;color:#f7f5ef}
+  .cover .subtitle{max-width:88mm;margin:0;color:#d7e2dc;font:12pt/1.5 var(--serif)}
+  .cover-meta{color:#c4d9d2;font:8pt var(--sans);letter-spacing:.08em;text-transform:uppercase}
+  .titlepage{page-break-before:always;text-align:center;padding-top:60mm}
+  .titlepage h1{font:500 34pt/1.05 var(--serif);letter-spacing:-.03em}
+  .titlepage .sub{font:12pt/1.5 var(--serif);color:#30464d;margin-top:8mm}
+  .titlepage .author{font:8pt var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#52636b;margin-top:26mm}
+  .titlepage .ed{font:9pt var(--serif);font-style:italic;color:#52636b;margin-top:2mm}
+  section{page-break-before:always}
+  .eyebrow{color:var(--teal);font:700 8pt var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:6pt}
+  h2{font-size:20pt;line-height:1.12;letter-spacing:-.02em;margin:0 0 10pt}
+  .part-divider{page-break-before:always;text-align:left;padding-top:44mm}
+  .part-divider .num{font:500 60pt/.9 var(--serif);color:#d8ded9;letter-spacing:-.05em}
+  .part-divider h2{font-size:24pt;margin-top:6mm}
+  .part-divider .lede{max-width:120mm;font:11pt/1.6 var(--serif);color:#30464d}
+  .chapter{page-break-before:always}
+  .casefile{display:inline-block;padding:2pt 8pt;border:1px solid var(--teal);color:var(--teal);font:700 7.5pt var(--sans);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8pt}
+  .chapter-brief{font:10.5pt/1.6 var(--serif);font-style:italic;color:#30464d}
+  .must-answer{margin:8pt 0;padding-left:16pt}
+  .must-answer li{margin-bottom:3pt}
+  .lead{max-width:150mm;font:11.5pt/1.6 var(--serif);color:#30464d}
+  .rule{width:44pt;height:2pt;margin:9pt 0 12pt;background:var(--gold)}
+  .ledger{width:100%;border-collapse:collapse;margin:10pt 0;font:9pt/1.5 var(--serif)}
+  .ledger th{background:#122831;color:#f7f5ef;text-align:left;padding:5pt 7pt;font:700 7.5pt var(--sans);letter-spacing:.08em;text-transform:uppercase}
+  .ledger td{border-bottom:1px solid var(--line);padding:5pt 7pt;vertical-align:top}
+  .ledger tr:nth-child(even) td{background:#f4f6f2}
+  .tag{display:inline-block;padding:1pt 6pt;border-radius:2pt;font:700 7pt var(--sans);letter-spacing:.1em;text-transform:uppercase}
+  .tag.obs{background:#e6f0ed;color:#145451}
+  .tag.rep{background:#e3ecf5;color:#1c4568}
+  .tag.inf{background:#f3ecdd;color:#7a5a20}
+  .tag.mod{background:#efe6f2;color:#5d3a6b}
+  .tag.dis{background:#f7e4e0;color:#8a3b30}
+  .tag.unk{background:#eceae4;color:#4a5551}
+  .callout{margin:10pt 0;padding:8pt 10pt;border-left:3pt solid var(--teal);background:var(--teal-light);font:9.5pt/1.55 var(--serif)}
+  .callout strong{color:#145451}
+  .callout.warn{border-left-color:var(--gold);background:#f6efdf}
+  .callout.warn strong{color:#7a5a20}
+  .table-wrap{overflow-x:auto;margin:10pt 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10pt;margin:10pt 0}
+  .card{border:1px solid var(--line);border-top:3pt solid var(--teal);background:#fff;padding:10pt 12pt}
+  .card h4{margin:0 0 4pt;font:700 8.5pt var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--navy)}
+  .card-lead{margin:0 0 5pt;font:700 9.5pt/1.5 var(--serif);color:#145451}
+  .card p{font:9.5pt/1.55 var(--serif)}
+  .verdict{margin:10pt 0;padding:10pt 12pt;background:#f2efe7;border-left:3pt solid var(--gold);font:9.5pt/1.55 var(--serif)}
+  .tag.pass{background:#e6f0ed;color:#145451}
+  .tag.fail{background:#f7e4e0;color:#8a3b30}
+  .draft-status{margin:12pt 0;padding-top:8pt;border-top:1px dashed var(--line);font:9pt var(--sans);color:#52636b}
+  .badge{display:inline-block;padding:1pt 7pt;border-radius:2pt;font:700 7.5pt var(--sans);letter-spacing:.08em;text-transform:uppercase;margin-right:6pt}
+  .badge.outline{background:#f3ecdd;color:#7a5a20;border:1px solid #e0cfa5}
+  .badge.draft{background:#e6f0ed;color:#145451;border:1px solid #bcd8d2}
+  .badge.verified{background:#e3ecf5;color:#1c4568;border:1px solid #b7cfe3}
+  ul,ol{padding-left:18pt}
+  li{margin-bottom:4pt}
+  .toc ol{list-style:none;padding-left:0}
+  .toc li{margin-bottom:7pt}
+  .toc .tpart{font:700 9pt var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-top:10pt}
+  .toc a{color:var(--ink)}
+  .toc .count{color:var(--muted);font:8.5pt var(--sans);float:right}
+  .footnote{font:8.5pt var(--serif);color:#52636b}
+  .status-block{margin-top:14pt;padding:10pt 12pt;background:#f2efe7;border-left:3pt solid var(--gold)}
+  .status-block h3{font:700 9pt var(--sans);letter-spacing:.12em;text-transform:uppercase;margin:0 0 6pt;color:#7a5a20}
+</style>
+</head>
+<body>
+<section class="chapter" id="chapter-4">
+  <span class="casefile">Case file 4</span>
+  <div class="eyebrow">Part II &middot; The World We Stand On</div>
+  <h2>Flat Here, Curved There? Earth&rsquo;s Shape, Scale, and Geometry</h2>
+  <div class="rule"></div>
+  <p class="lead">Stand at any shoreline at dawn and the world presents you its flattest argument: the sea lies level, the horizon is a straight line, and nothing about your vantage point suggests you are on the surface of a ball. Every sense available to the unaided body testifies to a plane. That testimony is real. It is also, as this chapter will argue, precisely the kind of testimony Part I has already interrogated — a signal below the instrument&rsquo;s sensitivity floor, doing the work of evidence for a question it was never built to answer.</p>
+
+  <p>Before the instruments speak, the parties set down what they actually claim. In Chapter 3 the flat-earth position was not a single hypothesis but a family of overlapping assertions, each with a different evidential status. That ledger applies here in full, and the same discipline will govern this chapter: when a flat-earth claim is &ldquo;tested,&rdquo; we test the strongest coherent version of it, not a weaker caricature, and we state which version the result speaks to.</p>
+
+  <table class="ledger">
+    <thead><tr><th style="width:26%">Claim</th><th style="width:12%">Kind</th><th style="width:30%">Falsified by</th><th>Live or dead</th></tr></thead>
+    <tbody>
+      <tr><td>The Earth is flat and finite, with an edge, and the horizon is the literal boundary of the world</td><td><span class="tag dis">Disconfirmed</span></td><td>Every circumnavigation; every total-distance survey of a great circle; every observation of a ship&rsquo;s hull vanishing below its own wake before the sky</td><td>Dead. No coherent version survives, and none is seriously maintained in the community</td></tr>
+      <tr><td>Curvature is real but small — visible only from sufficient height (the 6-foot-per-mile formulation)</td><td><span class="tag mod">Modified</span></td><td>Altitude-variation tests (4.3); the fact that the same formula, applied honestly, predicts <em>more</em> curvature the higher you go, which the claim then has to retract rather than defend</td><td>The working hypothesis of most modern flat-earth arguments. This chapter&rsquo;s primary target</td></tr>
+      <tr><td>Earth&rsquo;s apparent curvature is an artifact — atmospheric refraction, lensing, or camera behavior producing a false horizon</td><td><span class="tag unk">Unresolved</span></td><td>Pending: quantification (4.5). Must specify a mechanism whose net effect is exactly &minus;1 and which is altitude- and range-invariant</td><td>Live in some communities, rarely quantified. The most testable version of the family</td></tr>
+      <tr><td>The sphere is not a literal ball but an idealization — &ldquo;mathematical Earth&rdquo; — and the disputes concern the map, not the ground</td><td><span class="tag inf">Inference</span></td><td>Pending: 4.1 must show the idealization is load-bearing, not decorative</td><td>Live. Arguably the philosophically most serious version</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>4.1 &middot; The local frame.</strong> The first thing to concede, and the thing most flat-earth rhetoric overstates, is this: your local world is flat in a sense that is not metaphorical. The Earth&rsquo;s curvature, measured honestly, drops about 8 inches per square mile of distance from your feet (0.2 m at one mile, 2.4 m at five, 20.3 m at ten) — and over the span of a field, a runway, or a city block, that drop is smaller than the bumps in the road. The geometry of your immediate environment is, for every practical purpose a human being has ever had in it, plane geometry. That is not an illusion. It is the actual shape of the region you occupy.</p>
+
+  <p><strong>4.2 &middot; The hypothesis, stated once.</strong> <em>The Earth is a rotating oblate spheroid: approximately spherical, with an equatorial radius of about 6,378 km, a polar radius of about 6,357 km, and a surface whose local tangent plane is indistinguishable from a perfect plane over human-scale distances.</em> That single sentence is the claim under test for this entire chapter. It is not &ldquo;the Earth is a ball.&rdquo; It is a geometric statement with numbers, and numbers are where skepticism starts to bite.</p>
+
+  <p>Because the claim is a single geometric model, it licenses one prediction table. Every test that follows — every one, without exception — is a check of one of these rows. That is what makes the chapter auditable: a reader can re-run the audit by checking, for each test, which row it was assigned to, and whether the assignment is honest.</p>
+
+  <table class="ledger">
+    <thead><tr><th>Row</th><th>Observable consequence</th><th>Testable how cheaply</th></tr></thead>
+    <tbody>
+      <tr><td><strong>P1</strong></td><td>A distant object of known height sinks below the local horizontal line by a predictable, calculable amount, and that amount grows with both the distance and the observer&rsquo;s altitude</td><td>A ladder on a pier, a smartphone level, and a camera. No funding required</td></tr>
+      <tr><td><strong>P2</strong></td><td>A circumnavigation is possible by any route, and the total distance measured is consistent with a closed surface of ~40,070 km at the equator</td><td>Expensive, but it has been done many times — the audit is of the records, not the voyages</td></tr>
+      <tr><td><strong>P3</strong></td><td>A level surface (a body of water) at sufficient extent <em>exhibits</em> curvature: its far edge is lower than the local horizon defines it to be</td><td>A lake or sea, a height, and a ruler&rsquo;s-worth of trigonometry</td></tr>
+      <tr><td><strong>P4</strong></td><td>Distant objects disappear hull-first, and the height at which the hull reappears matches the geometry of a sphere of that radius, to within the instrument&rsquo;s error budget</td><td>One ship, two observers, two heights, and a stopwatch. Repeatable in an afternoon</td></tr>
+      <tr><td><strong>P5</strong></td><td>Angles in a triangle drawn on the ground sum to 180° plus a small, predictable excess — about 5 arc-seconds per 1,000 km² of area — that vanishes as the triangle shrinks</td><td>Three mountains, a theodolite, and patience. Done since the 1790s; repeatable any decade</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.3 &middot; P1, the honest version: the drop number.</h3>
+  <div class="rule"></div>
+
+  <p>The most-repeated figure in flat-earth arguments — &ldquo;6 feet per mile, 12 feet per two miles&rdquo; — fails this chapter&rsquo;s standard on all three counts at once. It was never predicted before the observation; it is the wrong number, by a factor of roughly nine; and its appearance after the fact is exactly the pattern the skeptic&rsquo;s ledger is meant to flag. The sphere predicts a drop of about 8 inches per <em>square</em> mile — 0.2 m at one mile, 2.4 m at five, 20.3 m at ten — and those are the numbers a test should aim at, not the numbers a story needs.</p>
+
+  <p>The test is P1 in its cheapest form. An object of known height at known distance, a camera at known height, a level. The question is a single yes/no with a number attached: does the object&rsquo;s base sit below the local horizontal line by D&sup2;/2R, within the instrument&rsquo;s error budget? There is no wiggle room in that question. A flat earth with a flat lens says no — the base sits on the horizontal line and any apparent drop is lens behavior. A sphere says yes, by exactly this much, and the amount grows with the <em>square</em> of the distance.</p>
+
+  <table class="ledger">
+    <thead><tr><th>Distance</th><th>Sphere predicts (drop of base)</th><th>Flat + lens predicts</th><th>How it discriminates</th></tr></thead>
+    <tbody>
+      <tr><td>1 mile</td><td>0.2 m (8 in)</td><td>0, or a lens-dependent constant</td><td>Sub-metre; needs a level and a camera at the right height</td></tr>
+      <tr><td>5 miles</td><td>2.4 m</td><td>The same constant as 1 mile</td><td>Clear</td></tr>
+      <tr><td>10 miles</td><td>20.3 m</td><td>The same constant</td><td>Unmissable</td></tr>
+    </tbody>
+  </table>
+
+  <p>The square law is doing the real work here, and it is what makes the test cheap to run. Lens distortion is a function of where the image falls on the sensor, not of how far away the object is — so doubling the distance leaves a lens artifact roughly unchanged and quadruples a geometric drop. Pick two distances, five and ten miles, and compare: if the drop quadruples, you measured geometry; if it stayed flat, you measured the lens. No funding required, no fleet required, one afternoon.</p>
+
+  <div class="callout"><strong>The altitude clause.</strong> P1 is not only about distance. The drop also depends on where you stand, and that dependence has a shape: the distance to the horizon scales as &radic;h, not as h. Double your height and the horizon moves out by &radic;2 &asymp; 1.41, not by 2. A flat-earth observer predicts no movement at all — the edge of the visible plane is a property of the eye, not the height. That is the 4.4 test, and it is the one flat-earth arguments usually retreat to once the distance test is taken seriously.</div>
+
+  <p class="footnote">The 6-feet-per-mile figure is sometimes defended as &ldquo;rounded&rdquo; or as already including a refraction allowance. Neither defense holds. Rounded from what, by a factor of nine, in which direction? And refraction allowance is handled in 4.5 — the correction there is on the order of &minus;25%, not +900%.</p>
+
+  <h3>4.4 <span class="tag mod">Modified</span> P4 &middot; The altitude test: the horizon must move as &radic;h</h3>
+  <div class="rule"></div>
+
+  <p>The fourth line is the one the flat-earth side knows it cannot dodge, because it is already built into its own folklore. The 6-feet-per-mile formula does more than state a drop — it is an implicit claim about what happens when you change height. A person 1.7 m above the surface should be able to see out to the place where the surface has dropped 1.7 m. Run the arithmetic with the flat-earth amplitude (6 ft/mile) and that place is one mile away. Run it with the spherical amplitude (8 in/mi&sup2;) and it is about three miles away. The actual horizon for a person standing on a beach is roughly the latter — visible from the beach are ships, lighthouses, and coastlines at distances the 6-feet figure says should be out of sight by a factor of three. The community&rsquo;s own number, applied to its own claim, disagrees with the community&rsquo;s own observation. That is not a flaw in the observation. It is a flaw in the number, and it is fixable — by adopting the correct amplitude, which is the amplitude this chapter has been deriving all along.</p>
+
+  <p>But the honest test is not &ldquo;does the horizon exist at all.&rdquo; It is: <strong>as you change your height, how far does the horizon move?</strong> The two hypotheses give different answers, and the difference is large.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Spherical prediction</h4>
+      <p class="card-lead">Horizon distance d = &radic;(2Rh) = 3.57&radic;h (km, h in metres)</p>
+      <p>Height and horizon distance are linked by a square root. Double the height and the horizon moves out by &radic;2 = 1.41. Double the distance and you needed four times the height. The whole family of predictions — the drop over ground, the horizon from height, the rise that must be gained to see over an obstruction — is one single number, 1/2R, seen from three angles. This is what the square-law structure of the geometry forces: every quantity in it scales as a square or a square root. There is no free parameter to tune. Fix R and every number in this section is fixed.</p>
+    </div>
+    <div class="card">
+      <h4>Flat-earth prediction</h4>
+      <p class="card-lead">d is independent of h (or d &asymp; h / 6 ft per mile)</p>
+      <p>If the surface is a plane, the horizon is a property of the eye, the atmosphere, and whatever &ldquo;edge&rdquo; the world has — none of which change when you climb. The flat-earth side must therefore predict one of two things: either the horizon does not move when your height changes (no change in visible range, ever, as you go from a beach to a lighthouse to a cliff), or it moves in proportion to h, linearly. Both are distinguishable from &radic;h with a ruler and a cliff.</p>
+    </div>
+  </div>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Eye height h</th><th class="num">Spherical: &radic;(2Rh)</th><th class="num">Flat (linear in h)</th><th class="num">Flat (no change)</th></tr></thead>
+    <tbody>
+      <tr><td>1.7 m (a person)</td><td class="num">4.65 km</td><td class="num">0.80 km</td><td class="num">— (no shift with h)</td></tr>
+      <tr><td>10 m (a small tower)</td><td class="num">11.3 km</td><td class="num">1.9 km</td><td class="num">— (no shift with h)</td></tr>
+      <tr><td>100 m (a lighthouse)</td><td class="num">35.7 km</td><td class="num">5.9 km</td><td class="num">— (no shift with h)</td></tr>
+      <tr><td>500 m (a cliff)</td><td class="num">79.7 km</td><td class="num">11.3 km</td><td class="num">— (no shift with h)</td></tr>
+      <tr><td>5,000 m (a mountain)</td><td class="num">252 km</td><td class="num">36 km</td><td class="num">— (no shift with h)</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The test is brutal and cheap. Stand on a beach, note how far out the horizon lies. Climb to a 100 m lighthouse. The spherical prediction says the horizon must have moved to 35.7 km — 7.7 times further. The linear-flat prediction says 5.9 km. The no-change prediction says it did not move. All three numbers are different by factors the naked eye can resolve: from a cliff, one can or cannot see a town 30 km away, depending on which hypothesis is right, and the answer is publicly knowable and has been known for two thousand years. Every published flat-earth altitude table, examined in that order, either omits the column entirely, or reproduces the spherical numbers without noticing that they are the ones they have omitted. The altitude dependence is the single most discriminating fact in this whole chapter: it is the one place where the flat-earth side has no folklore of its own to fall back on, and where the correct number and the wrong one differ by a factor of 3 to 19 that no amount of refraction, haze, or &ldquo;perspective correction&rdquo; can close, because no constant refractive bend, applied the same way at every altitude, produces a &radic;h dependence — and the bending required to fake it changes by a factor of four between the beach and the mountain.</p>
+
+  <div class="callout warn">
+    <strong>The &ldquo;just refraction, then&rdquo; trap.</strong> The most common flat-earth answer to 4.4 is to invoke refraction as the thing that makes the horizon appear where the flat-earth numbers predict. But refraction is a <em>known, measured, altitude-dependent</em> property of the atmosphere. It is not a free parameter the flat-earth model can set to whatever it needs; it is a parameter the spherical model already has, already corrected for, and already quantified — which is exactly what 4.5 does. If you move refraction from the correction column to the load-bearing column, you have not saved the flat-earth model. You have replaced a model with a fudge and then asked the fudge to do the work of the model.</div>
+
+  <h3>4.5 <span class="tag mod">Modified</span> P3 &middot; The artifact claim: refraction, quantified</h3>
+  <div class="rule"></div>
+
+  <p>The flat-earth side&rsquo;s most developed answer to 4.3 is this: the drop you are measuring is not geometric — it is an optical artifact, produced by refraction in the atmosphere, by atmospheric density gradients, or by some combination of both. The Earth is not curved; the light is bent. This chapter has been treating that claim as the central defense of the position, and it deserves its full arithmetic, because it is the only one of the flat-earth claims that has ever been stated with a number attached.</p>
+
+  <p>Refraction in a standard atmosphere bends light downward, toward the denser air, by an amount that is not guesswork. It is measured, tabulated, and corrected for routinely in surveying, in lighthouse optics, in satellite navigation, and in every long-range optical design. The conventional engineering description uses a single parameter k, the reduced refractivity constant, and the standard value for the standard atmosphere is <strong>k &asymp; 0.75</strong>, which corresponds to an effective Earth radius of <strong>R/k = R/0.75 &asymp; 1.33R</strong> for the purpose of horizon calculations. In plain terms: the standard atmosphere shaves about 25% off the apparent curvature — the geometric drop becomes 0.75 of its pure value, and the horizon distance moves out by about 15%. That is the entire standard correction. It does not make a flat Earth look curved. It makes a curved Earth look a little less curved. The two statements are not the same, and the arithmetic between them is the whole of this section.</p>
+  <p>Now run the artifact model to its limit. If refraction is the <em>source</em> of curvature rather than a correction to it, then the required bending is not 25% of the Earth's curvature — it is <strong>100%</strong>. A flat surface plus atmosphere must produce the whole of the drop D²/2R on its own, so the ray has to bend at exactly the same rate as the Earth curves. The standard atmosphere supplies roughly a quarter of that, in the most generous standard reading. Where does the other three quarters come from? It would have to be supplied by a refractive layer whose strength is four times the standard value and whose profile is tuned, over every path, to exactly compensate the geometry — and it would have to do so <em>and</em> still leave the √h altitude dependence of P4 in place, which the flat model cannot do without bending that grows with altitude in precisely the wrong way (the next chunk shows the numbers). The artifact claim is therefore not a different number. It is a different machine, and the machine has no parts list.</p>
+  <p>One sentence to close the section: refraction is a real, measured, small correction — and a small correction is exactly what you use when the model underneath it is correct. A correction large enough to replace the model would have been noticed everywhere else refraction is used, and it has not been.</p>
+</section>
+
+<section id="s4-6">
+  <h3>4.6 · Verdict</h3>
+  <div class="rule"></div>
+  <p>Five predictions. Four of them are settled by arithmetic that has no room for adjustment. The fifth — refraction as an artifact — survives on a 25% correction being promoted to a 100% replacement, with no parts list for the missing 75%.</p>
+
+  <div class="verdict">
+    <h3>Verdict · Chapter 4</h3>
+    <p><strong>P1 — The drop:</strong> D²/2R is measured to the square law across ranges and altitudes. <span class="tag pass">PASSES</span></p>
+    <p><strong>P2 — The triangle:</strong> excess ≈ 5″ per 1,000 km², measured by geodesy and survey. <span class="tag pass">PASSES</span></p>
+    <p><strong>P3 — The artifact:</strong> standard refraction supplies ~25% of the required bending; the rest is unspecified. <span class="tag fail">FAILS</span></p>
+    <p><strong>P4 — The altitude test:</strong> √h is observed; the flat model is off by factors of 3–19×. <span class="tag fail">FAILS</span></p>
+    <p><strong>P5 — The quantification:</strong> every quantity above is fixed, not fitted. <span class="tag pass">PASSES</span></p>
+  </div>
+
+  <p>Earth is flat in the way that a coin is flat: a locally valid approximation, good to better than one part in a million for most engineering, and wrong — decisively wrong, by amounts that have been measured — the moment you stop pretending the approximation is the thing. The drop, the triangle, the horizon, the altitude: four independent clocks, all running at the same rate, all pointing at a sphere of radius 6,371 kilometres. That is not a conspiracy of instruments. It is what it looks like when the ground is curved.</p>
+</section>
+
+</body>
+</html>
+
+

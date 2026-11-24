@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A book blueprint for The Skeptic: a reader-led investigation of scientific claims, evidence, assumptions, and uncertainty.">
+  <title>The Skeptic | Book Blueprint</title>
+  <style>
+    :root {
+      --ink: #17242c;
+      --muted: #52636b;
+      --paper: #fbfaf7;
+      --teal: #176b68;
+      --teal-light: #e6f0ed;
+      --gold: #c28a3b;
+      --line: #d8ded9;
+      --navy: #122831;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Aptos", "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.68 var(--sans);
+    }
+    a { color: var(--teal); }
+    .cover {
+      min-height: 92vh;
+      padding: 9vh max(8vw, 32px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #f7f5ef;
+      background:
+        radial-gradient(ellipse at 82% 28%, rgba(39, 130, 123, .46), transparent 36%),
+        linear-gradient(135deg, #10232c, #183d45 68%, #10232c);
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::after {
+      content: "";
+      position: absolute;
+      width: 52vw;
+      height: 52vw;
+      right: -13vw;
+      bottom: -27vw;
+      border: 1px solid rgba(238, 240, 225, .24);
+      border-radius: 50%;
+      box-shadow: 0 0 0 38px rgba(238, 240, 225, .035), 0 0 0 78px rgba(238, 240, 225, .035);
+    }
+    .cover-mark, .cover h1, .cover .subtitle, .cover-meta { position: relative; z-index: 1; }
+    .cover-mark, .eyebrow {
+      color: #c4d9d2;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .cover h1 {
+      max-width: 760px;
+      margin: 8vh 0 1rem;
+      font: 500 7rem/.87 var(--serif);
+      letter-spacing: -.065em;
+    }
+    .cover .subtitle {
+      max-width: 610px;
+      margin: 0;
+      color: #d7e2dc;
+      font: 1.35rem/1.5 var(--serif);
+    }
+    .cover-meta {
+      margin-top: 10vh;
+      color: #c4d9d2;
+      font-size: .84rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    main { max-width: 1020px; margin: auto; padding: 0 42px 100px; }
+    section { padding-top: 70px; }
+    h2, h3, h4 { color: var(--navy); }
+    h2 {
+      margin: 0 0 1.3rem;
+      font: 500 clamp(2.2rem, 5vw, 3.5rem)/1.08 var(--serif);
+      letter-spacing: -.035em;
+    }
+    h3 {
+      margin: 2rem 0 .45rem;
+      font: 600 1.42rem/1.25 var(--serif);
+    }
+    h4 {
+      margin: 1.4rem 0 .35rem;
+      font-size: .9rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    p { margin: .55rem 0 1rem; }
+    .lead { max-width: 790px; font: 1.3rem/1.55 var(--serif); color: #30464d; }
+    .eyebrow { color: var(--teal); margin-bottom: .75rem; }
+    .rule { width: 62px; height: 3px; margin: 1.3rem 0 1.8rem; background: var(--gold); }
+    .note, .callout {
+      margin: 1.5rem 0;
+      padding: 1.15rem 1.4rem;
+      border-left: 4px solid var(--teal);
+      background: var(--teal-light);
+    }
+    .callout strong { color: #145451; }
+    .note { background: #f2efe7; border-left-color: var(--gold); }
+    .contents {
+      columns: 2;
+      column-gap: 55px;
+      padding-left: 1.3rem;
+    }
+    .contents li { break-inside: avoid; margin: .35rem 0; }
+    .part {
+      margin: 4rem 0 2rem;
+      padding: 1.5rem 1.7rem 1.4rem;
+      color: #f5f5ee;
+      background: var(--navy);
+      border-top: 4px solid var(--gold);
+      break-before: page;
+    }
+    .part .eyebrow { color: #b7d5cc; }
+    .part h3 { margin: .2rem 0 .35rem; color: white; font: 500 2rem/1.15 var(--serif); }
+    .part p { margin: 0; color: #d2dfdb; }
+    .chapter {
+      padding: 0 0 1.4rem;
+      border-bottom: 1px solid var(--line);
+      break-inside: avoid;
+    }
+    .chapter h3 { margin-top: 1.6rem; }
+    .chapter .tag {
+      color: var(--teal);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: .28rem 0; }
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .card {
+      padding: 1.1rem 1.2rem;
+      border: 1px solid var(--line);
+      background: #fffefa;
+      break-inside: avoid;
+    }
+    .card h3 { margin: .1rem 0 .45rem; font-size: 1.16rem; }
+    .card p:last-child { margin-bottom: 0; }
+    .ledger {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 22px;
+      margin: 1.5rem 0;
+    }
+    .ledger div { padding: .8rem 1rem; background: #f0f3ef; border-left: 2px solid var(--teal); }
+    .ledger strong { display: block; color: var(--navy); }
+    .quote {
+      margin: 2rem 0;
+      padding: .3rem 0 .3rem 1.5rem;
+      border-left: 2px solid var(--gold);
+      color: #344c53;
+      font: 1.35rem/1.5 var(--serif);
+    }
+    .small { color: var(--muted); font-size: .9rem; }
+    .sources li { overflow-wrap: anywhere; }
+    footer {
+      margin-top: 70px;
+      padding: 25px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .85rem;
+    }
+    @page {
+      size: A4;
+      margin: 19mm 18mm 20mm;
+      @top-left {
+        content: "THE SKEPTIC  /  BOOK BLUEPRINT";
+        color: #55706e;
+        font: 8pt Arial, sans-serif;
+        letter-spacing: 1pt;
+      }
+      @bottom-right {
+        content: counter(page);
+        color: #55706e;
+        font: 9pt Arial, sans-serif;
+      }
+    }
+    @media print {
+      body { background: white; font-size: 10.5pt; line-height: 1.55; }
+      .cover { min-height: 250mm; page-break-after: always; }
+      .cover h1 { font-size: 72pt; }
+      main { max-width: none; padding: 0; }
+      section { padding-top: 12mm; }
+      h2 { font-size: 28pt; }
+      h3 { font-size: 15pt; }
+      a { color: inherit; text-decoration: none; }
+      .part { margin-top: 0; padding: 12mm; }
+      .chapter { padding-bottom: 4mm; }
+      .contents a::after { content: "  ·  " target-counter(attr(href), page); color: #66817b; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <div class="cover-mark">A book blueprint</div>
+    <div>
+      <h1>The<br>Skeptic</h1>
+      <p class="subtitle">A reader's guide to scientific claims, hidden assumptions, and the space between evidence and certainty.</p>
+    </div>
+    <div class="cover-meta">Working proposal &nbsp; / &nbsp; November 2026</div>
+  </header>
+
+  <main>
+    <section id="overview">
+      <div class="eyebrow">01 / The project</div>
+      <h2>Question the chain.<br>Keep the question open.</h2>
+      <div class="rule"></div>
+      <p class="lead">The Skeptic is a guided investigation of widely accepted scientific claims. It asks how those claims are built, which parts are directly observed, which parts are inferred, what assumptions connect them, and where genuine uncertainty remains.</p>
+      <p>The book is intentionally skeptical of certainty, authority, and easy stories. It is not a claim that mainstream science is always wrong, that every alternative is equally well supported, or that skepticism by itself supplies a better explanation. The reader is invited to examine both accepted and dissenting accounts, including evidence that complicates the book's own preferred questions.</p>
+      <div class="callout"><strong>Reader promise:</strong> No conclusion gets a free pass because it is mainstream, alternative, popular, unfunded, or personally appealing. The book will show its work and mark the boundary between what is observed, inferred, assumed, and unknown.</div>
+      <p class="small"><strong>Scope:</strong> This document is a complete project blueprint and proposed table of contents, not a finished scientific manuscript. Each chapter will require its own source review, expert consultation where appropriate, and fact-checking before publication.</p>
+    </section>
+
+    <section id="position">
+      <div class="eyebrow">02 / Editorial position</div>
+      <h2>Open-minded, not answerless</h2>
+      <p>The book's point of view is that knowledge is built through evidence, methods, interpretation, and human institutions. Those foundations can be strong, provisional, contested, or poorly communicated. Saying “we do not know for sure” is an honest starting point in many debates, but it does not mean that all explanations have equal evidence or that nothing can be known.</p>
+      <div class="two-col">
+        <div class="card">
+          <h3>What the book will do</h3>
+          <ul>
+            <li>Give the mainstream account and the strongest skeptical challenge a fair hearing.</li>
+            <li>Trace claims back to observations, measurements, methods, and assumptions.</li>
+            <li>Ask how claims can be checked beyond personal experience.</li>
+            <li>Distinguish uncertainty about a detail from uncertainty about an entire field.</li>
+            <li>Explain what could change the confidence of either side.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What the book will not do</h3>
+          <ul>
+            <li>Present an unverified alternative as established fact.</li>
+            <li>Use “scientists assume” as a substitute for showing the actual assumption.</li>
+            <li>Equate lack of funding, consensus, or personal replication with proof.</li>
+            <li>Hide inconvenient evidence or use false balance.</li>
+            <li>Require readers to accept a religious or anti-religious conclusion.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note"><strong>Central tension:</strong> The project deliberately examines highly trusted scientific talking points. To remain credible, it must be equally willing to discover that a skeptical argument is weak, that an accepted interpretation is robust, or that the evidence leaves a question unresolved.</div>
+    </section>
+
+    <section id="trust">
+      <div class="eyebrow">03 / A reader's toolkit</div>
+      <h2>When we cannot check everything ourselves</h2>
+      <p>Most people cannot personally repeat a rocket launch, inspect every detector, or reproduce a complex laboratory study. Modern knowledge depends on other people, instruments, records, and institutions. That reliance deserves scrutiny, but inability to repeat an experiment at home is not the same as the experiment being untestable.</p>
+      <p>The book will distinguish personal checking from independent checking. For a rocket flight, a reader may directly see a launch, examine tracking information, compare observations from independent observers, and evaluate how a reported trajectory was inferred. Each step supports a different claim. A visible launch alone does not establish every detail of a mission; difficulty reproducing the entire mission does not erase every other available check.</p>
+      <div class="quote">When a claim is distant from everyday experience, trace the chain of evidence before deciding how much trust it deserves.</div>
+      <h3>The evidence ladder</h3>
+      <div class="ledger">
+        <div><strong>Directly observed</strong>What a person can see, hear, measure, or record firsthand.</div>
+        <div><strong>Independently checked</strong>Results examined by other people, instruments, methods, or institutions.</div>
+        <div><strong>Replicated</strong>A method or result repeated under defined conditions, with limits stated.</div>
+        <div><strong>Inferred</strong>A conclusion drawn from observations rather than directly seen.</div>
+        <div><strong>Model-dependent</strong>A result whose meaning relies on a specified model, parameter, or convention.</div>
+        <div><strong>Unsettled</strong>A live disagreement, missing measurement, unresolved mechanism, or disputed interpretation.</div>
+      </div>
+      <p>These are not a simple ranking from “true” to “false.” Direct observation can be mistaken; inference can be powerful when independently constrained. The labels help readers see what kind of support a claim has and where a chain might be vulnerable.</p>
+      <h3>The assumption-cascade warning</h3>
+      <p>Later claims can depend on earlier measurements, classifications, and models. If an early link is weak, misunderstood, or treated as more certain than it is, confidence may accumulate as claims are built on top of it. Each chapter will map those dependencies and ask whether later evidence independently checks the earlier links or simply inherits them.</p>
+      <p><strong>Fair caution:</strong> A long chain is not automatically a bad chain. Independent checks can strengthen it. The question is whether each important link is visible, testable in some meaningful way, and represented with confidence proportionate to its support.</p>
+    </section>
+
+    <section id="method">
+      <div class="eyebrow">04 / Chapter method</div>
+      <h2>A case file, an evidence trail, a real exchange</h2>
+      <p>The book uses a hybrid format. The case-file narrative makes each topic memorable; the evidence trail shows how knowledge is built; and a short back-and-forth gives competing views a chance to answer one another. Each chapter ends with questions rather than a forced verdict.</p>
+      <ol>
+        <li><strong>The claim:</strong> State the familiar talking point precisely. Avoid vague versions that cannot be tested.</li>
+        <li><strong>Why it matters:</strong> Connect the subject to everyday life, history, technology, identity, health, or worldview.</li>
+        <li><strong>The observation:</strong> Identify what was directly measured or recorded, and by whom.</li>
+        <li><strong>The evidence trail:</strong> Trace instruments, procedures, data, models, assumptions, and interpretation.</li>
+        <li><strong>The mainstream account:</strong> Present its strongest case, including predictive successes and acknowledged limits.</li>
+        <li><strong>The skeptical challenge:</strong> Present its strongest version, distinguishing a testable objection from a general expression of distrust.</li>
+        <li><strong>The exchange:</strong> Let each side answer the other's strongest point. Correct errors on either side.</li>
+        <li><strong>The stress test:</strong> Ask what observation would strengthen or weaken each explanation, and whether the proposed test is feasible.</li>
+        <li><strong>The evidence ledger:</strong> Mark what is observed, replicated, inferred, model-dependent, disputed, or unknown.</li>
+        <li><strong>The open question:</strong> End with what the reader can reasonably conclude, what remains unsettled, and what would be worth checking next.</li>
+      </ol>
+      <div class="callout"><strong>Memory device:</strong> Claim → Evidence trail → Competing explanations → Cross-examination → Open questions.</div>
+      <p class="small">Each debate will be sourced with primary research where available, independent replications, review articles, historical records, and serious critics from more than one perspective. Search summaries and AI-generated answers are leads to investigate, not authorities to cite as final evidence.</p>
+    </section>
+
+    <section id="contents">
+      <div class="eyebrow">05 / Proposed table of contents</div>
+      <h2>From the ground beneath us to the limits of knowledge</h2>
+      <p class="lead">The order moves from claims readers can picture and investigate toward deeper questions about life, the universe, mind, and the institutions that produce knowledge.</p>
+      <ol class="contents">
+        <li><a href="#prologue">Prologue: The Bone That Shouldn't Last?</a></li>
+        <li><a href="#part1">Part I: How We Decide What We Know</a></li>
+        <li><a href="#part2">Part II: The World We Stand On</a></li>
+        <li><a href="#part3">Part III: Life, Health, and Human Origins</a></li>
+        <li><a href="#part4">Part IV: The Universe and Its Clocks</a></li>
+        <li><a href="#part5">Part V: The Smallest Scales and the Energy Question</a></li>
+        <li><a href="#part6">Part VI: Mind, Society, and the Knowledge System</a></li>
+        <li><a href="#epilogue">Epilogue: Living Without a Final Answer</a></li>
+        <li><a href="#research">Research and source standards</a></li>
+      </ol>
+    </section>
+
+    <section id="prologue">
+      <div class="eyebrow">Opening case</div>
+      <h2>Prologue: The Bone That Shouldn't Last?</h2>
+      <p>Begin with reports of soft tissue, vessel-like structures, and protein fragments associated with dinosaur fossils. Lay out the striking observation, the mainstream interpretations of preservation, the skeptical questions about expected decay and contamination, and what each line of evidence can establish. The prologue does not decide the age of the fossils; it gives readers a concrete puzzle and models the book's method.</p>
+      <p><strong>Opening question:</strong> When an observation seems to conflict with an established timeline, what should we examine first: the observation, the timeline, the preservation model, or the assumptions connecting them?</p>
+    </section>
+
+    <section id="part1">
+      <div class="part">
+        <div class="eyebrow">Foundation</div>
+        <h3>Part I / How We Decide What We Know</h3>
+        <p>Give readers tools for evaluating claims before asking them to evaluate controversial conclusions.</p>
+      </div>
+      <article class="chapter">
+        <div class="tag">Chapter 1</div>
+        <h3>Seeing Is Not the Same as Knowing</h3>
+        <p>Separate observations from explanations. Explore how instruments extend the senses, why measurements require definitions and calibration, and how the same data can be interpreted through different models.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 2</div>
+        <h3>Evidence Beyond Personal Reach</h3>
+        <p>Use rocket launches, satellite tracking, and large experiments to ask what readers can verify, what independent observers can check, and how much of a conclusion depends on trust in an evidence chain. Emphasize that limited personal access is a reason to inspect the chain, not proof that it is false.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 3</div>
+        <h3>Models, Uncertainty, and What Would Change Our Minds?</h3>
+        <p>Explain uncertainty ranges, model dependence, replication, falsifiability, anomalies, and the difference between “not absolutely certain” and “unsupported.” Introduce the assumption-cascade map used throughout the book.</p>
+      </article>
+    </section>
+
+    <section id="part2">
+      <div class="part">
+        <div class="eyebrow">Earth and history</div>
+        <h3>Part II / The World We Stand On</h3>
+        <p>Start with accessible measurements, then widen to Earth's history, fossil interpretation, and archaeological timelines.</p>
+      </div>
+      <article class="chapter">
+        <div class="tag">Chapter 4 / Major feature chapter</div>
+        <h3>Flat Here, Curved There? Earth's Shape, Scale, and Geometry</h3>
+        <p><strong>Target length: approximately 25–35 pages.</strong> Begin with the everyday appearance of a level surface. Clarify what “flat” and “round” mean at different scales and distinguish a plane, sphere, oblate spheroid, geoid, and mathematical manifold. Explain that a manifold is a mathematical space with locally familiar coordinates; the term alone is not evidence for a physical Earth model. Discuss local flatness as an approximation and global curvature as a measurable question.</p>
+        <p>Present the strongest flat-Earth arguments and the strongest globe-Earth arguments. Examine horizon observations, changing star positions, shadow measurements, long-distance surveying, travel routes, and other commonly cited evidence. For each, state the prediction, the method, possible sources of error, and what the observation can and cannot establish. Include reader-accessible observation exercises and explain atmospheric, geometric, and instrument limitations without assuming the result in advance.</p>
+        <p>Address the claim that flat-Earth evidence receives less funding or institutional attention. Treat resource inequality as a question about access and independent scrutiny, not as evidence that an underfunded claim is true. Ask what could be documented, repeated, and checked by people with modest means. End with a visible evidence ledger and open questions.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 5</div>
+        <h3>The Clock in the Rock</h3>
+        <p>Examine radiometric dating: radioactive decay, half-lives, parent and daughter isotopes, closed-system assumptions, contamination, calibration, and how multiple dating methods are compared. Ask which assumptions are measured, which are inferred, and what forms of independent agreement matter.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 6</div>
+        <h3>The Fossil, the Tissue, and the Timeline</h3>
+        <p>Return to the opening puzzle. Review claims about soft tissue and preserved molecules, proposed preservation mechanisms, contamination controls, dating context, and skeptical critiques. Keep separate the discovery of biological material, the interpretation of its preservation, and claims about the fossil's age.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 7</div>
+        <h3>Catastrophe or Slow Change?</h3>
+        <p>Explore geological history, uniformitarian reasoning, catastrophic events, stratigraphy, plate tectonics, and how local observations are combined into accounts of deep time. Ask how competing explanations make different predictions.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 8</div>
+        <h3>Who Came First?</h3>
+        <p>Examine human origins through fossils, genetics, migration evidence, species definitions, gaps in the record, and debates about how findings are narrated. Distinguish evidence for relatedness from claims about the meaning of human identity.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 9</div>
+        <h3>How Old Is Civilization?</h3>
+        <p>Investigate archaeology, dating techniques, artifacts, oral histories, contested chronologies, and how national, religious, and cultural stories shape the interpretation of ancient evidence.</p>
+      </article>
+    </section>
+
+    <section id="part3">
+      <div class="part">
+        <div class="eyebrow">Biology and health</div>
+        <h3>Part III / Life, Health, and Human Origins</h3>
+        <p>Address claims that affect medicine, identity, and our understanding of living systems.</p>
+      </div>
+      <article class="chapter">
+        <div class="tag">Chapter 10</div>
+        <h3>What Does It Mean to Isolate a Virus?</h3>
+        <p>Clarify isolation, purification, cultivation, imaging, sequencing, and causal evidence. Explore what each method establishes, what controls are needed, and how laboratory findings connect to disease in people. Avoid treating “isolation” as one universally agreed procedure or treating disagreement over terminology as proof that viruses do not exist.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 11</div>
+        <h3>Where Did Life Begin?</h3>
+        <p>Compare origin-of-life hypotheses such as RNA-first, metabolism-first, hydrothermal-vent, and other proposed pathways. Distinguish plausible chemistry, demonstrated steps, unresolved transitions, and claims that go beyond current evidence.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 12</div>
+        <h3>Evolution: Evidence, Mechanisms, and Open Questions</h3>
+        <p>Examine common descent, natural selection, neutral theory, genetics, epigenetics, horizontal gene transfer, and evolutionary developmental biology. Separate evidence for change and relatedness from debates about mechanisms, rates, and historical details.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 13</div>
+        <h3>Genes, Heredity, and Human Difference</h3>
+        <p>Explore genes and environment, polygenic traits, developmental variation, epigenetics, ancestry, and the limits of biological categories. Consider how public claims can outrun what genetic studies support.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 14</div>
+        <h3>When Does a Test Become a Diagnosis?</h3>
+        <p>Examine biomarkers, false positives, disease definitions, placebo and nocebo effects, drug trials, publication bias, and the difference between statistical change and meaningful health outcomes.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 15</div>
+        <h3>Complex Causes: Epidemiology, Nutrition, and Climate</h3>
+        <p>Use complex systems to examine correlation and causation, observational research, confounding, risk communication, model projections, and uncertainty. These distinct topics may be split into separate chapters during manuscript development if the evidence warrants more room.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 16</div>
+        <h3>What Counts as a Species, a Virus, or a Disease?</h3>
+        <p>Show how scientific categories are built, revised, and sometimes contested. Ask what is biological, what is operational or practical, and what changes when a definition becomes a social or legal rule.</p>
+      </article>
+    </section>
+
+    <section id="part4">
+      <div class="part">
+        <div class="eyebrow">Astronomy and time</div>
+        <h3>Part IV / The Universe and Its Clocks</h3>
+        <p>Move from light and distance to cosmic history, invisible components, and the reach of astronomical inference.</p>
+      </div>
+      <article class="chapter">
+        <div class="tag">Chapter 17</div>
+        <h3>How Far Away Is Far Away?</h3>
+        <p>Explain parallax, standard candles, redshift, distance ladders, and the assumptions that connect local measurements to distant galaxies. Ask how uncertainty propagates as a measurement chain grows longer.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 18</div>
+        <h3>Does Light Have a One-Way Speed?</h3>
+        <p>Introduce round-trip measurements, distant clock synchronization, the Einstein synchrony convention, and alternative conventions such as the Anisotropic Synchrony Convention. Distinguish a coordinate convention from a physical claim, examine observable consequences, and assess whether proposed alternatives change predictions or only descriptions.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 19</div>
+        <h3>A Universe with a Beginning?</h3>
+        <p>Review cosmic expansion, the cosmic microwave background, stellar and galactic evolution, and the inferences used to describe cosmic history. Separate observed signals from the timelines and mechanisms inferred from them.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 20</div>
+        <h3>Dark Matter, Dark Energy, and What We Cannot See</h3>
+        <p>Examine the observations that motivate unseen components, alternative gravitational explanations, the predictive successes and tensions of current models, and the risks of treating a placeholder as a directly observed substance.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 21</div>
+        <h3>Life Beyond Earth?</h3>
+        <p>Explore habitability, biosignatures, possible false positives, the meaning of a life detection, and the limits of remote evidence. Ask what would count as strong confirmation to a skeptical observer.</p>
+      </article>
+    </section>
+
+    <section id="part5">
+      <div class="part">
+        <div class="eyebrow">Physics and technology</div>
+        <h3>Part V / The Smallest Scales and the Energy Question</h3>
+        <p>Examine foundational physical models and the powerful technologies built from them.</p>
+      </div>
+      <article class="chapter">
+        <div class="tag">Chapter 22</div>
+        <h3>The Atom as a Clock</h3>
+        <p>Connect nuclear decay and half-lives to dating methods. Discuss nuclear models, decay-rate evidence, measurement limits, and what it means to rely on a stable physical process across long intervals.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 23</div>
+        <h3>What Is Quantum Mechanics Saying About Reality?</h3>
+        <p>Separate the predictions of quantum theory from interpretations such as Copenhagen, many-worlds, pilot-wave, relational, and objective-collapse approaches. Ask what is experimentally constrained, what is interpretation, and whether empirically equivalent accounts can be distinguished.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 24</div>
+        <h3>Nuclear Power: Promise, Risk, and Unknowns</h3>
+        <p>Consider fission, fusion, waste, safety, energy density, proliferation, and policy. Distinguish established engineering performance from forecasts about cost, deployment, and long-term risk.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 25</div>
+        <h3>Energy, Entropy, and the Limits of Efficiency</h3>
+        <p>Explore thermodynamics, entropy, information, energy transitions, and claims about efficiency or novel energy sources. Show how extraordinary claims can be tested without dismissing unfamiliar ideas in advance.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 26</div>
+        <h3>Materials That Could Change the World</h3>
+        <p>Use batteries, superconductors, advanced materials, and laboratory-to-market claims to discuss reproducibility, scale-up, commercial incentives, and the distance between a reported effect and a transformative technology.</p>
+      </article>
+    </section>
+
+    <section id="part6">
+      <div class="part">
+        <div class="eyebrow">Mind and society</div>
+        <h3>Part VI / Mind, Society, and the Knowledge System</h3>
+        <p>End with questions that reach into personal identity, responsibility, public life, and the institutions that shape accepted knowledge.</p>
+      </div>
+      <article class="chapter">
+        <div class="tag">Chapter 27</div>
+        <h3>What Is Consciousness?</h3>
+        <p>Compare physicalist, emergent, dualist, and other accounts of subjective experience. Distinguish brain measurements from claims about what experience is, and ask what evidence could resolve the disagreement.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 28</div>
+        <h3>Do We Choose?</h3>
+        <p>Examine determinism, randomness, compatibilism, neuroscience experiments, and the consequences of different views for responsibility, justice, addiction, and moral life.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 29</div>
+        <h3>Can We Trust the Knowledge System?</h3>
+        <p>Investigate peer review, replication, funding, patents, conflicts of interest, publication incentives, research cultures, and how dissent is handled. Discuss institutional failure without assuming that every expert conclusion is therefore unreliable.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 30</div>
+        <h3>Psychology, Economics, and the Models We Live By</h3>
+        <p>Explore replication concerns, sampling limits, behavioral assumptions, forecasting, ideology, and the ways social-science models influence education, policy, work, housing, and inequality.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 31</div>
+        <h3>Artificial Intelligence and the Meaning of Intelligence</h3>
+        <p>Ask what AI systems demonstrate about learning, prediction, agency, understanding, and consciousness. Separate observable performance from claims about minds and future capabilities.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 32</div>
+        <h3>Can We Know the Whole Story?</h3>
+        <p>Introduce induction, Bayesian reasoning, measurement limits, philosophical assumptions, and formal limits on complete systems of knowledge. End by asking whether humility is a weakness or a necessary part of inquiry.</p>
+      </article>
+    </section>
+
+    <section id="epilogue">
+      <div class="eyebrow">Closing</div>
+      <h2>Epilogue: Living Without a Final Answer</h2>
+      <p>Return to the fossil from the prologue. Ask what the reader learned about evidence, interpretation, and confidence—not whether they adopted a replacement worldview. Some questions may look more settled after examination; others may look more complicated. The goal is to leave readers more capable of noticing assumptions, following sources, and changing their minds when evidence warrants it.</p>
+      <div class="quote">Freedom from one narrative should not mean captivity to another. Keep asking what is known, how it is known, and what remains open.</div>
+      <p>The book should close with a compact personal checklist readers can use beyond its pages: define the claim; find the original evidence; separate observation from inference; inspect the assumptions; look for independent checks; compare the strongest alternatives; and state what would change your mind.</p>
+    </section>
+
+    <section id="consequences">
+      <div class="eyebrow">The human stakes</div>
+      <h2>Why these debates matter</h2>
+      <p>Every chapter should connect its technical question to consequences people recognize. The aim is not to claim that one scientific debate automatically changes the world, but to show how beliefs and models can shape choices.</p>
+      <div class="two-col">
+        <div class="card"><h3>Health and bodies</h3><p>Diagnosis, treatment, public-health policy, nutrition, and confidence in medical institutions.</p></div>
+        <div class="card"><h3>History and identity</h3><p>Human origins, cultural memory, religious interpretation, and who gets to tell the past.</p></div>
+        <div class="card"><h3>Energy and security</h3><p>Nuclear power, climate decisions, technological investment, and long-term risk.</p></div>
+        <div class="card"><h3>Worldview and meaning</h3><p>Human uniqueness, consciousness, free will, cosmic history, and the boundary between science and philosophy.</p></div>
+      </div>
+    </section>
+
+    <section id="research">
+      <div class="eyebrow">Publication standard</div>
+      <h2>Research and source standards</h2>
+      <p>The book's credibility depends on showing how sources were selected and what each source can establish. A skeptical project must not apply stricter standards to mainstream claims than to alternatives, or vice versa.</p>
+      <ul class="sources">
+        <li>Prefer original papers, datasets, methods, and historical documents for specific factual claims.</li>
+        <li>Use reviews and textbooks to orient the reader, but check important assertions against primary work.</li>
+        <li>Represent positions using their strongest serious sources, not only summaries by opponents.</li>
+        <li>Seek independent replication, dissenting analysis, and corrections where available.</li>
+        <li>Label expert consensus as evidence about the state of a field, not as a substitute for explaining the evidence.</li>
+        <li>State the date and scope of literature searches; distinguish an unanswered question from a question no one has studied.</li>
+        <li>Verify quotations, numbers, and claims from videos or AI summaries at the original source before publication.</li>
+        <li>Use a fact-check table recording claim, source, source type, limitations, and status before prose is finalized.</li>
+        <li>For health, safety, and policy topics, avoid turning scientific uncertainty into personal medical or safety advice.</li>
+      </ul>
+      <h3>Conversation materials that seeded this proposal</h3>
+      <p>The project began from two shared Google AI Mode conversations: one about constructing or identifying viral components and what “isolation” means; another about distant starlight, one-way light speed, and the Anisotropic Synchrony Convention. These are useful records of the questions that motivated the book, but their claims and cited sources must be independently checked before use as evidence.</p>
+      <ul>
+        <li><a href="https://share.google/aimode/frT3jbrh7VIW6arvX">Shared conversation: viral isolation question</a></li>
+        <li><a href="https://share.google/aimode/owiW5woSv9yoKj7hk">Shared conversation: distant starlight and light-speed debate</a></li>
+        <li><a href="https://www.youtube.com/watch?v=vlzuvogisLM">Video referenced in the second conversation</a></li>
+      </ul>
+    </section>
+
+    <section id="next">
+      <div class="eyebrow">Development roadmap</div>
+      <h2>From blueprint to manuscript</h2>
+      <ol>
+        <li><strong>Confirm the book's promise:</strong> reader audience, voice, length, and the balance between accessible explanation and technical detail.</li>
+        <li><strong>Build a source dossier:</strong> start with the fossil, Earth-shape, virus, and light-speed chapters, recording primary sources and serious counterarguments.</li>
+        <li><strong>Draft one pilot chapter:</strong> recommend “Evidence Beyond Personal Reach” or “Flat Here, Curved There?” to test the method and voice.</li>
+        <li><strong>Fact-check the chapter:</strong> have the strongest claims reviewed by knowledgeable readers with different starting views.</li>
+        <li><strong>Revise the template:</strong> keep the structure memorable while allowing each scientific field to use methods appropriate to its evidence.</li>
+        <li><strong>Draft the full manuscript:</strong> expand, combine, or split chapters only after the source work reveals the appropriate scope.</li>
+      </ol>
+      <div class="note"><strong>Practical note:</strong> Thirty-two proposed chapters are an ambitious full-length book. The final manuscript may combine related chapters or become a series. The pilot chapter should test workload and reader appeal before every topic is treated as equally deep.</div>
+    </section>
+
+    <footer>
+      <strong>The Skeptic</strong> &nbsp; / &nbsp; Book blueprint &nbsp; / &nbsp; Working document, November 2026
+    </footer>
+  </main>
+</body>
+</html>

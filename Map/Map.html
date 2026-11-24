@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheSkeptic — Book Outline</title>
+<script src="data.js"></script>
+<style>
+  :root {
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c222b; --border:#30363d;
+    --text:#c9d1d9; --dim:#8b949e; --accent:#58a6ff;
+    --green:#3fb950; --amber:#d29922; --red:#f85149; --violet:#bc8cff;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.55 -apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); }
+  header { padding:24px 32px 10px; max-width:980px; margin:0 auto; }
+  h1 { font-size:1.35rem; margin:0 0 4px; }
+  .sub { color:var(--dim); font-size:.88rem; }
+  main { padding:0 32px 64px; max-width:980px; margin:0 auto; }
+  .toolbar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:18px 0 6px; position:sticky; top:0; z-index:5; background:var(--bg); padding:8px 0; }
+  .toolbar input[type=search] { flex:1 1 220px; background:var(--panel); border:1px solid var(--border); color:var(--text); border-radius:6px; padding:7px 12px; font-size:.95rem; }
+  .toolbar input[type=search]:focus { outline:none; border-color:var(--accent); }
+  .toolbar button { background:var(--panel); border:1px solid var(--border); color:var(--text); border-radius:6px; padding:6px 12px; font-size:.88rem; cursor:pointer; }
+  .toolbar button:hover { border-color:var(--accent); color:var(--accent); }
+  .toolbar .sel { background:var(--panel); border:1px solid var(--border); color:var(--text); border-radius:6px; padding:6px 8px; font-size:.88rem; }
+
+  /* Tree */
+  .tree { margin-top:10px; }
+  .node { margin:0 0 10px; }
+  .node > .head { display:flex; align-items:baseline; gap:10px; cursor:pointer; border-radius:8px; padding:8px 12px; user-select:none; }
+  .node > .head:hover { background:var(--panel); }
+  .node > .head .caret { width:14px; flex:none; color:var(--dim); font-size:.8rem; transition:transform .15s; }
+  .node.open > .head .caret { transform:rotate(90deg); }
+  .node .body { display:none; margin:4px 0 0 26px; border-left:1px solid var(--border); padding-left:14px; }
+  .node.open > .body { display:block; }
+  .part .head { font-size:1.02rem; font-weight:600; color:#e6edf3; background:var(--panel); border:1px solid var(--border); }
+  .part .head .pnum { color:var(--accent); flex:none; font-size:.8rem; }
+  .chap .head { font-size:.95rem; }
+  .chap .head .cnum { color:var(--violet); flex:none; font-size:.78rem; font-weight:600; }
+  .count { margin-left:auto; color:var(--dim); font-size:.75rem; white-space:nowrap; }
+  .part .phead { cursor:pointer; border-radius:8px; padding:8px 12px; background:var(--panel); border:1px solid var(--border); user-select:none; }
+  .part .phead:hover { border-color:var(--accent); }
+  .part .ptitle { display:flex; align-items:baseline; gap:10px; font-size:1.02rem; font-weight:600; color:#e6edf3; }
+  .part .ptitle .caret { width:14px; flex:none; color:var(--dim); font-size:.8rem; transition:transform .15s; }
+  .part.open .ptitle .caret { transform:rotate(90deg); }
+  .part .pdesc { color:var(--dim); font-size:.85rem; margin-top:4px; }
+  .part .pkids { display:none; margin:6px 0 0 14px; border-left:1px solid var(--border); padding-left:14px; }
+  .part.open > .pkids { display:block; }
+
+  /* Chips */
+  .tag { display:inline-block; font-size:.7rem; padding:1px 8px; border-radius:10px; flex:none; }
+  .s-done { background:#1f3a2c; color:#9be5b8; }
+  .s-draft { background:#3a2f1f; color:#e5c07b; }
+  .s-planned { background:#242b36; color:#9ecbff; }
+
+  /* Claims */
+  .claim { background:var(--panel); border:1px solid var(--border); border-radius:8px; margin:0 0 8px; }
+  .claim .chead { display:flex; gap:10px; padding:9px 12px 4px; }
+  .claim .stance { font-weight:600; color:#e6edf3; }
+  .claim .chapter-context { padding:0 12px 4px; color:var(--dim); font-size:.8rem; }
+  .claim .why { padding:0 12px 8px; color:var(--dim); font-size:.88rem; }
+  .evid { border-top:1px dashed var(--border); margin-top:2px; }
+  .evid summary { cursor:pointer; padding:7px 12px; color:var(--dim); font-size:.82rem; list-style:none; }
+  .evid summary::-webkit-details-marker { display:none; }
+  .evid summary::before { content:"▸ "; color:var(--red); }
+  .evid[open] summary::before { content:"▾ "; }
+  .evid .ebody { padding:0 12px 10px; }
+  .evrow { display:flex; gap:8px; align-items:baseline; margin:4px 0; font-size:.85rem; }
+  .evrow .ev { color:#f0a59d; flex:none; font-size:.72rem; font-weight:700; }
+  .evrow .esrc { color:var(--dim); font-size:.78rem; font-style:italic; }
+  code { background:#21262d; padding:1px 5px; border-radius:4px; font-size:.82em; }
+
+  /* Debates */
+  .debates { margin-top:12px; }
+  .debates h4 { margin:0 0 8px; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--dim); }
+  .debate { background:var(--panel2); border:1px solid var(--border); border-left:3px solid var(--violet); border-radius:8px; margin:0 0 8px; padding:10px 14px; }
+  .debate .dtitle { font-weight:600; color:#e6edf3; margin-bottom:6px; }
+  .drow { display:flex; gap:10px; margin:5px 0; font-size:.88rem; }
+  .drow .side { flex:none; width:110px; font-size:.72rem; font-weight:700; }
+  .drow.pro .side { color:#9be5b8; }
+  .drow.con .side { color:#f0a59d; }
+  .drow .text { color:var(--text); }
+  .dref { color:var(--accent); background:none; border:none; cursor:pointer; font-size:.78rem; text-decoration:underline; padding:0; }
+
+  /* Flash + highlight */
+  .flash { animation:flash 1.2s ease-out; }
+  @keyframes flash { 0% { box-shadow:0 0 0 3px var(--accent); } 100% { box-shadow:0 0 0 0 transparent; } }
+  mark { background:#3a2f1f; color:#e5c07b; border-radius:3px; padding:0 2px; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="h1">TheSkeptic</h1>
+  <div class="sub" id="sub"></div>
+</header>
+<main>
+  <div class="toolbar">
+    <select class="sel" id="status"><option value="">All statuses</option></select>
+    <input type="search" id="q" placeholder="Search claims, chapters, threads…">
+    <button id="expand" type="button">Expand all</button>
+    <button id="collapse" type="button">Collapse all</button>
+    <span class="count" id="stats"></span>
+  </div>
+  <div id="tree" class="tree"></div>
+</main>
+<script>
+const D = window.MANUSCRIPT_DATA;
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const tagCls = (s) => ({done:'s-done', draft:'s-draft', planned:'s-planned'})[s] || 's-planned';
+const tag = (s) => `<span class="tag ${tagCls(s)}">${s}</span>`;
+const fileLink = (f) => `<a class="dref" href="${esc(f)}" target="_blank">${esc(f.split('/').pop())}</a>`;
+
+// ---- Group chapters by part (sequential walk of the ordered array) ----
+const groups = [];
+let cur = null;
+for (const c of D.chapters) {
+  if (c.type === 'part') { cur = { part: c, chapters: [] }; groups.push(cur); }
+  else if (c.type === 'chapter' && cur) cur.chapters.push(c);
+}
+const introCh = D.chapters.find(c => c.type === 'prologue');
+const outroCh = D.chapters.find(c => c.type === 'epilogue');
+const topicById = {};
+D.topics.forEach(t => topicById[t.id] = t);
+
+// ---- Card builders ----
+function chapterNode(ch) {
+  const extra = [];
+  if (ch.note) extra.push(esc(ch.note));
+  if (ch.files) extra.push(ch.files.map(fileLink).join(' '));
+  const body = extra.length ? `<div class="body"><div class="sub">${extra.join(' ')}</div></div>` : '';
+  const searchTxt = (ch.title + ' ' + (ch.note || '') + ' ' + (ch.files || []).join(' ')).toLowerCase();
+  return `
+  <div class="node chap" data-status="${ch.status || 'planned'}" data-search="${esc(searchTxt)}">
+    <div class="head"><span class="caret">▶</span>${ch.num != null ? `<span class="cnum">${String(ch.num).padStart(2,'0')}</span>` : '<span class="cnum">·</span>'}${esc(ch.title)}${ch.major ? ' <span class="tag s-draft">★ major</span>' : ''} ${tag(ch.status || 'planned')}</div>
+    ${body}
+  </div>`;
+}
+
+function claimCard(t, ch) {
+  const deps = D.dependencies.filter(d => d.topic === t.id);
+  const branch = t.branch ? D.branches.find(b => b.id === t.branch) : null;
+  const chapterFiles = ch && ch.files ? ch.files : [];
+  const files = [...new Set([...(t.files || []), ...chapterFiles])];
+  const rows = [];
+  if (branch) rows.push(`<div class="evrow"><span class="ev">THREAD</span><span>${esc(branch.title)}</span></div>`);
+  if (deps.length) {
+    const html = deps.map(d => {
+      const dep = topicById[d.on];
+      return dep
+        ? `<button class="dref" data-target="claim-${esc(d.on)}">${esc(dep.title)}</button>`
+        : esc(d.on);
+    }).join(' + ');
+    rows.push(`<div class="evrow"><span class="ev">DEPS</span><span>depends on ${html}</span></div>`);
+  }
+  if (files.length) rows.push(`<div class="evrow"><span class="ev">FILE</span><span>${files.map(fileLink).join(' ')}</span></div>`);
+  const evid = rows.length
+    ? `<details class="evid"><summary>Supporting thread &amp; dependencies</summary><div class="ebody">${rows.join('')}</div></details>`
+    : '';
+  const context = ch
+    ? `<div class="chapter-context">Chapter ${String(ch.num).padStart(2, '0')} · ${esc(ch.title)}${ch.major ? ' · major feature' : ''}</div>`
+    : '';
+  const searchTxt = [t.title, t.desc, ch ? ch.title : '', branch ? branch.title : '', files.join(' '), deps.map(d => d.on + ' ' + (topicById[d.on] ? topicById[d.on].title : '')).join(' ')].join(' ').toLowerCase();
+  return `
+  <div class="claim" id="claim-${t.id}" data-status="${t.status}" data-search="${esc(searchTxt)}">
+    <div class="chead"><span class="stance">${esc(t.title)}</span>${tag(t.status)}</div>
+    ${context}
+    <div class="why">${esc(t.desc)}</div>
+    ${evid}
+  </div>`;
+}
+
+function debateCard(t) {
+  const rows = D.dependencies.filter(d => d.topic === t.id).map(d => {
+    const dep = topicById[d.on];
+    const ref = dep
+      ? `<button class="dref" data-target="claim-${esc(d.on)}">${esc(dep.title)}</button>`
+      : esc(d.on);
+    const note = d.note ? ` <span class="sub">${esc(d.note)}</span>` : '';
+    return `<div class="drow"><span class="dlab">on</span> ${ref}${note}</div>`;
+  }).join('');
+  return `
+  <div class="claim debate" id="claim-${t.id}" data-status="${t.status}" data-search="${esc((t.title + ' ' + (t.desc || '') + ' ' + (t.why || '')).toLowerCase())}">
+    <div class="chead"><span class="stance">⚖ ${esc(t.title)}</span>${tag(t.status)}</div>
+    <div class="why">${esc(t.desc || '')}</div>
+    <div class="ebody">${rows}</div>
+  </div>`;
+}
+
+function structureCard(t) {
+  return `
+  <div class="claim struct" id="claim-${t.id}" data-status="${t.status}" data-search="${esc((t.title + ' ' + (t.desc || '')).toLowerCase())}">
+    <div class="chead"><span class="stance">▦ ${esc(t.title)}</span>${tag(t.status)}</div>
+    ${t.desc ? `<div class="why">${esc(t.desc)}</div>` : ''}
+  </div>`;
+}
+
+function partNode(g) {
+  const kids = g.chapters.map(ch => {
+    const t = topicById['ch' + ch.num];
+    return t ? claimCard(t, ch) : chapterNode(ch);
+  }).join('');
+  const files = g.part.files ? g.part.files.map(fileLink).join(' ') : '';
+  const searchTxt = (g.part.title + ' ' + (g.part.desc || '') + ' ' + files).toLowerCase();
+  return `
+  <div class="part" data-search="${esc(searchTxt)}">
+    <div class="phead">
+      <div class="ptitle"><span class="caret">▶</span>${esc(g.part.title)}</div>
+      ${g.part.desc ? `<div class="pdesc">${esc(g.part.desc)}</div>` : ''}
+      ${files ? `<div class="sub">${files}</div>` : ''}
+    </div>
+    <div class="pkids">${kids}</div>
+  </div>`;
+}
+
+// ---- Render ----
+const $$ = (s, root) => Array.from((root || document).querySelectorAll(s));
+
+function applyFilters() {
+  const q = $('#q').value.trim().toLowerCase();
+  const st = $('#status').value;
+  let shown = 0;
+  const leaves = $$('#tree [data-status]');
+  leaves.forEach(el => {
+    const part = el.closest('.part');
+    const partMatch = q !== '' && part && (part.dataset.search || '').includes(q);
+    const ok = (st === '' || el.dataset.status === st)
+      && (q === '' || partMatch || (el.dataset.search || '').includes(q));
+    el.classList.toggle('hidden', !ok);
+    if (ok) shown++;
+  });
+  $$('#tree .part').forEach(p => {
+    const kidsVisible = $$('[data-status]', p).some(el => !el.classList.contains('hidden'));
+    p.classList.toggle('hidden', !kidsVisible);
+    if (kidsVisible) p.classList.add('open');
+  });
+  $('#stats').textContent = `showing ${shown} of ${leaves.length}`;
+}
+
+function render() {
+  $('#h1').textContent = D.title;
+  $('#sub').textContent = `${D.subtitle} · updated ${D.updated}`;
+  D.statusTaxonomy.forEach(([label, desc]) => {
+    const o = document.createElement('option');
+    o.value = label.toLowerCase();
+    o.textContent = label;
+    o.title = desc;
+    $('#status').appendChild(o);
+  });
+  const lead = introCh ? chapterNode(introCh) : '';
+  const tail = outroCh ? chapterNode(outroCh) : '';
+  $('#tree').innerHTML = lead + groups.map(partNode).join('') + tail;
+  applyFilters();
+}
+
+// ---- Events ----
+$('#tree').addEventListener('click', e => {
+  const dref = e.target.closest('button.dref[data-target]');
+  if (dref) {
+    e.preventDefault();
+    const t = document.getElementById(dref.dataset.target);
+    if (!t) return;
+    for (let el = t.parentElement; el && el.id !== 'tree'; el = el.parentElement) {
+      if (el.classList.contains('part') || el.classList.contains('node')) el.classList.add('open');
+    }
+    t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    t.classList.remove('flash');
+    void t.offsetWidth;
+    t.classList.add('flash');
+    return;
+  }
+  const head = e.target.closest('.node > .head, .part > .phead');
+  if (head) head.parentElement.classList.toggle('open');
+});
+$('#expand').addEventListener('click', () => $$('#tree .node, #tree .part').forEach(el => el.classList.add('open')));
+$('#collapse').addEventListener('click', () => $$('#tree .node, #tree .part').forEach(el => el.classList.remove('open')));
+$('#q').addEventListener('input', applyFilters);
+$('#status').addEventListener('change', applyFilters);
+
+render();
+</script>
+</body>
+</html>

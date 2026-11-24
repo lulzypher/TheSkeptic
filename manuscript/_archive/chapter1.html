@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Skeptic — Chapter 1 · Case file 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root { --ink:#1c1a17; --paper:#fbfaf6; --accent:#9a3b2e; --line:#e7e2d8; --muted:#6c655b; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font: 16px/1.7 Georgia,'Times New Roman',serif; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding: 14px 5vw; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--paper); z-index:10; }
+    .brand { font-weight:700; letter-spacing:.02em; color:var(--ink); text-decoration:none; }
+    .topnav a { color:var(--muted); text-decoration:none; margin-left:18px; font-family:monospace; font-size:13px; }
+    .topnav a:hover { color:var(--accent); }
+    main { max-width: 74ch; margin: 0 auto; padding: 8vh 8vw 14vh; }
+    section.chapter { margin-bottom: 10vh; }
+    .casefile { font-family:monospace; font-size:12px; letter-spacing:.15em; color:var(--accent); text-transform:uppercase; }
+    .chapter h2 { font-size:32px; margin:.4em 0 .3em; font-weight:700; }
+    .chapter h3 { font-size:20px; margin:1.6em 0 .4em; font-weight:700; color:#33302b; }
+    .rule { border:0; border-top:1px solid var(--line); margin:28px 0; }
+    .chapter p { margin: 0 0 1.1em; }
+    .chapter-brief { color:var(--muted); font-style:italic; }
+    table.ledger { width:100%; border-collapse:collapse; margin: 18px 0 8px; font: 14px/1.55 ui-monospace,monospace; }
+    table.ledger th { text-align:left; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); padding:8px 10px; border-bottom:2px solid var(--ink); }
+    table.ledger td { vertical-align:top; padding:10px; border-bottom:1px solid var(--line); }
+    .tag { display:inline-block; font-size:10px; letter-spacing:.1em; padding:1px 6px; border:1px solid; border-radius:2px; margin-right:6px; text-transform:uppercase; }
+    .tag.obs { color:#2f5d3a; border-color:#2f5d3a; }
+    .tag.inf { color:#7a5a2a; border-color:#7a5a2a; }
+    .tag.unk { color:#8a2f2f; border-color:#8a2f2f; }
+    .part-divider { text-align:center; padding: 10vh 8vw; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#f5f2ea; }
+    .part-divider h1 { font-size:40px; margin:.2em 0; }
+    .partnum { font-family:monospace; font-size:13px; letter-spacing:.2em; color:var(--accent); }
+    footer { text-align:center; padding:30px 0 60px; color:var(--muted); font-family:monospace; font-size:12px; }
+    @media (max-width:560px){ main{padding:6vh 6vw 10vh;} table.ledger{font-size:12px;} }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <a class="brand" href="prologue.html"><strong>The Skeptic</strong> · a ledger of what we know</a>
+    <nav class="topnav">
+      <a href="prologue.html">Prologue</a>
+      <a href="chapter1.html">Ch.1</a>
+      <a href="chapter2.html">Ch.2</a>
+    </nav>
+  </nav>
+  <main>
+    <section class="part-divider">
+      <div class="partnum">Part I</div>
+      <h1>Seeing</h1>
+      <p class="epigraph">The first act of evidence is not belief. It is the description of what arrived, and of what that means — and what it does not.</p>
+    </section>
+    <section id="ch1" class="chapter">
+      <span class="casefile">Case file 1</span>
+      <div class="eyebrow">Part I · Seeing</div>
+      <h2>Seeing Is Not the Same as Knowing</h2>
+      <div class="rule"></div>
+      <p>When you look at a glass of water on a desk, you see the glass, the water, the desk, the light coming from one direction, the shadow falling from the other. You do not see the water molecules, and yet you believe there are water molecules in the glass. That gap — between what arrives in the eye and what you take to be true — is the entire subject of the book. This chapter examines it, because everything else in the project, from quarks to dreams, stands on whether that gap can be crossed honestly.</p>
+      <p>The claim I want to test is deceptively small: <em>seeing is not the same as knowing, and the difference is not a failure of perception but a feature of the world.</em> If I can defend that claim, then "I saw it myself" is not the end of an argument; it is the beginning of one. If I cannot defend it, then the skeptic's tool — the ledger of Observed / Inferred / Unknown — has no first row to write in, and the book needs a different shape.</p>
+      <div class="rule"></div>
+      <h3>The evidence ledger</h3>
+      <p class="chapter-brief">What this chapter has established, what it has added, and what it still needs.</p>
+      <table class="ledger">
+        <thead>
+          <tr><th>Observed</th><th>Inferred</th><th>Unknown</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The retina samples light and sends a spiking summary; the visual cortex organizes it into surfaces, edges, and objects.</td>
+        <td>That "the scene" arrived intact; that color, depth, and object boundaries are properties of the external scene rather than properties of the representation.</td>
+        <td>What the chain discarded, and which discarded features would change the judgment you are making right now.</td>
+      </tr>
+      <tr>
+        <td>You attended to a few objects and ignored the rest. A color was named. A direction was estimated.</td>
+        <td>That the unattended parts were "not there" or "irrelevant," when in fact they were merely unrepresented in this particular output.</td>
+        <td>Whether the specific objects that captured your attention are the ones that mattered for the conclusion being drawn from this scene.</td>
+      </tr>
+      <tr>
+        <td>None of the above was written down. The description of the scene was formed in real time, in memory, and has already been edited.</td>
+        <td>That the memory of the scene is a faithful record. In fact, the first "version" of the scene was already a reconstruction, not a recording.</td>
+        <td>How much of what you remember of the scene is the scene, and how much is the mind's model of what the scene should have contained.</td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+    <p class="colophon">The Skeptic · manuscript · <a href="part1.html">open the full text</a></p>
+  </footer>
+</body>
+</html>

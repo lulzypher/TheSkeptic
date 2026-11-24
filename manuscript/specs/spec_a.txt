@@ -1,0 +1,68 @@
+        <h3>Part II / The World We Stand On</h3>
+        <p>Start with accessible measurements, then widen to Earth's history, fossil interpretation, and archaeological timelines.</p>
+      </div>
+      <article class="chapter">
+        <div class="tag">Chapter 4 / Major feature chapter</div>
+        <h3>Flat Here, Curved There? Earth's Shape, Scale, and Geometry</h3>
+        <p><strong>Target length: approximately 25–35 pages.</strong> Begin with the everyday appearance of a level surface. Clarify what “flat” and “round” mean at different scales and distinguish a plane, sphere, oblate spheroid, geoid, and mathematical manifold. Explain that a manifold is a mathematical space with locally familiar coordinates; the term alone is not evidence for a physical Earth model. Discuss local flatness as an approximation and global curvature as a measurable question.</p>
+        <p>Present the strongest flat-Earth arguments and the strongest globe-Earth arguments. Examine horizon observations, changing star positions, shadow measurements, long-distance surveying, travel routes, and other commonly cited evidence. For each, state the prediction, the method, possible sources of error, and what the observation can and cannot establish. Include reader-accessible observation exercises and explain atmospheric, geometric, and instrument limitations without assuming the result in advance.</p>
+        <p>Address the claim that flat-Earth evidence receives less funding or institutional attention. Treat resource inequality as a question about access and independent scrutiny, not as evidence that an underfunded claim is true. Ask what could be documented, repeated, and checked by people with modest means. End with a visible evidence ledger and open questions.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 5</div>
+        <h3>The Clock in the Rock</h3>
+        <p>Examine radiometric dating: radioactive decay, half-lives, parent and daughter isotopes, closed-system assumptions, contamination, calibration, and how multiple dating methods are compared. Ask which assumptions are measured, which are inferred, and what forms of independent agreement matter.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 6</div>
+        <h3>The Fossil, the Tissue, and the Timeline</h3>
+        <p>Return to the opening puzzle. Review claims about soft tissue and preserved molecules, proposed preservation mechanisms, contamination controls, dating context, and skeptical critiques. Keep separate the discovery of biological material, the interpretation of its preservation, and claims about the fossil's age.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 7</div>
+        <h3>Catastrophe or Slow Change?</h3>
+        <p>Explore geological history, uniformitarian reasoning, catastrophic events, stratigraphy, plate tectonics, and how local observations are combined into accounts of deep time. Ask how competing explanations make different predictions.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 8</div>
+        <h3>Who Came First?</h3>
+        <p>Examine human origins through fossils, genetics, migration evidence, species definitions, gaps in the record, and debates about how findings are narrated. Distinguish evidence for relatedness from claims about the meaning of human identity.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 9</div>
+        <h3>How Old Is Civilization?</h3>
+        <p>Investigate archaeology, dating techniques, artifacts, oral histories, contested chronologies, and how national, religious, and cultural stories shape the interpretation of ancient evidence.</p>
+      </article>
+    </section>
+
+    <section id="part3">
+      <div class="part">
+        <div class="eyebrow">Biology and health</div>
+        <h3>Part III / Life, Health, and Human Origins</h3>
+        <p>Address claims that affect medicine, identity, and our understanding of living systems.</p>
+      </div>
+      <article class="chapter">
+        <div class="tag">Chapter 10</div>
+        <h3>What Does It Mean to Isolate a Virus?</h3>
+        <p>Clarify isolation, purification, cultivation, imaging, sequencing, and causal evidence. Explore what each method establishes, what controls are needed, and how laboratory findings connect to disease in people. Avoid treating “isolation” as one universally agreed procedure or treating disagreement over terminology as proof that viruses do not exist.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 11</div>
+        <h3>Where Did Life Begin?</h3>
+        <p>Compare origin-of-life hypotheses such as RNA-first, metabolism-first, hydrothermal-vent, and other proposed pathways. Distinguish plausible chemistry, demonstrated steps, unresolved transitions, and claims that go beyond current evidence.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 12</div>
+        <h3>Evolution: Evidence, Mechanisms, and Open Questions</h3>
+        <p>Examine common descent, natural selection, neutral theory, genetics, epigenetics, horizontal gene transfer, and evolutionary developmental biology. Separate evidence for change and relatedness from debates about mechanisms, rates, and historical details.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 13</div>
+        <h3>Genes, Heredity, and Human Difference</h3>
+        <p>Explore genes and environment, polygenic traits, developmental variation, epigenetics, ancestry, and the limits of biological categories. Consider how public claims can outrun what genetic studies support.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 14</div>
+        <h3>When Does a Test Become a Diagnosis?</h3>
+        <p>Examine biomarkers, false positives, disease definitions, placebo and nocebo effects, drug trials, publication bias, and the difference between statistical change and meaningful health outcomes.</p>
+      </article>

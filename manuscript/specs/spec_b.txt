@@ -1,0 +1,76 @@
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 15</div>
+        <h3>Complex Causes: Epidemiology, Nutrition, and Climate</h3>
+        <p>Use complex systems to examine correlation and causation, observational research, confounding, risk communication, model projections, and uncertainty. These distinct topics may be split into separate chapters during manuscript development if the evidence warrants more room.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 16</div>
+        <h3>What Counts as a Species, a Virus, or a Disease?</h3>
+        <p>Show how scientific categories are built, revised, and sometimes contested. Ask what is biological, what is operational or practical, and what changes when a definition becomes a social or legal rule.</p>
+      </article>
+    </section>
+
+    <section id="part4">
+      <div class="part">
+        <div class="eyebrow">Astronomy and time</div>
+        <h3>Part IV / The Universe and Its Clocks</h3>
+        <p>Move from light and distance to cosmic history, invisible components, and the reach of astronomical inference.</p>
+      </div>
+      <article class="chapter">
+        <div class="tag">Chapter 17</div>
+        <h3>How Far Away Is Far Away?</h3>
+        <p>Explain parallax, standard candles, redshift, distance ladders, and the assumptions that connect local measurements to distant galaxies. Ask how uncertainty propagates as a measurement chain grows longer.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 18</div>
+        <h3>Does Light Have a One-Way Speed?</h3>
+        <p>Introduce round-trip measurements, distant clock synchronization, the Einstein synchrony convention, and alternative conventions such as the Anisotropic Synchrony Convention. Distinguish a coordinate convention from a physical claim, examine observable consequences, and assess whether proposed alternatives change predictions or only descriptions.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 19</div>
+        <h3>A Universe with a Beginning?</h3>
+        <p>Review cosmic expansion, the cosmic microwave background, stellar and galactic evolution, and the inferences used to describe cosmic history. Separate observed signals from the timelines and mechanisms inferred from them.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 20</div>
+        <h3>Dark Matter, Dark Energy, and What We Cannot See</h3>
+        <p>Examine the observations that motivate unseen components, alternative gravitational explanations, the predictive successes and tensions of current models, and the risks of treating a placeholder as a directly observed substance.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 21</div>
+        <h3>Life Beyond Earth?</h3>
+        <p>Explore habitability, biosignatures, possible false positives, the meaning of a life detection, and the limits of remote evidence. Ask what would count as strong confirmation to a skeptical observer.</p>
+      </article>
+    </section>
+
+    <section id="part5">
+      <div class="part">
+        <div class="eyebrow">Physics and technology</div>
+        <h3>Part V / The Smallest Scales and the Energy Question</h3>
+        <p>Examine foundational physical models and the powerful technologies built from them.</p>
+      </div>
+      <article class="chapter">
+        <div class="tag">Chapter 22</div>
+        <h3>The Atom as a Clock</h3>
+        <p>Connect nuclear decay and half-lives to dating methods. Discuss nuclear models, decay-rate evidence, measurement limits, and what it means to rely on a stable physical process across long intervals.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 23</div>
+        <h3>What Is Quantum Mechanics Saying About Reality?</h3>
+        <p>Separate the predictions of quantum theory from interpretations such as Copenhagen, many-worlds, pilot-wave, relational, and objective-collapse approaches. Ask what is experimentally constrained, what is interpretation, and whether empirically equivalent accounts can be distinguished.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 24</div>
+        <h3>Nuclear Power: Promise, Risk, and Unknowns</h3>
+        <p>Consider fission, fusion, waste, safety, energy density, proliferation, and policy. Distinguish established engineering performance from forecasts about cost, deployment, and long-term risk.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 25</div>
+        <h3>Energy, Entropy, and the Limits of Efficiency</h3>
+        <p>Explore thermodynamics, entropy, information, energy transitions, and claims about efficiency or novel energy sources. Show how extraordinary claims can be tested without dismissing unfamiliar ideas in advance.</p>
+      </article>
+      <article class="chapter">
+        <div class="tag">Chapter 26</div>
+        <h3>Materials That Could Change the World</h3>
+        <p>Use batteries, superconductors, advanced materials, and laboratory-to-market claims to discuss reproducibility, scale-up, commercial incentives, and the distance between a reported effect and a transformative technology.</p>

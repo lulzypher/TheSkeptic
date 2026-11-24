@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Skeptic — Chapter 2 · Case file 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root { --ink:#1c1a17; --paper:#fbfaf6; --accent:#9a3b2e; --line:#e7e2d8; --muted:#6c655b; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font: 16px/1.7 Georgia,'Times New Roman',serif; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding: 14px 5vw; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--paper); z-index:10; }
+    .brand { font-weight:700; letter-spacing:.02em; color:var(--ink); text-decoration:none; }
+    .topnav a { color:var(--muted); text-decoration:none; margin-left:18px; font-family:monospace; font-size:13px; }
+    .topnav a:hover { color:var(--accent); }
+    main { max-width: 74ch; margin: 0 auto; padding: 8vh 8vw 14vh; }
+    section.chapter { margin-bottom: 10vh; }
+    .casefile { font-family:monospace; font-size:12px; letter-spacing:.15em; color:var(--accent); text-transform:uppercase; }
+    .chapter h2 { font-size:32px; margin:.4em 0 .3em; font-weight:700; }
+    .chapter h3 { font-size:20px; margin:1.6em 0 .4em; font-weight:700; color:#33302b; }
+    .rule { border:0; border-top:1px solid var(--line); margin:28px 0; }
+    .chapter p { margin: 0 0 1.1em; }
+    .chapter-brief { color:var(--muted); font-style:italic; }
+    table.ledger { width:100%; border-collapse:collapse; margin: 18px 0 8px; font: 14px/1.55 ui-monospace,monospace; }
+    table.ledger th { text-align:left; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); padding:8px 10px; border-bottom:2px solid var(--ink); }
+    table.ledger td { vertical-align:top; padding:10px; border-bottom:1px solid var(--line); }
+    .tag { display:inline-block; font-size:10px; letter-spacing:.1em; padding:1px 6px; border:1px solid; border-radius:2px; margin-right:6px; text-transform:uppercase; }
+    .tag.obs { color:#2f5d3a; border-color:#2f5d3a; }
+    .tag.inf { color:#7a5a2a; border-color:#7a5a2a; }
+    .tag.unk { color:#8a2f2f; border-color:#8a2f2f; }
+    .part-divider { text-align:center; padding: 10vh 8vw; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#f5f2ea; }
+    .part-divider h1 { font-size:40px; margin:.2em 0; }
+    .partnum { font-family:monospace; font-size:13px; letter-spacing:.2em; color:var(--accent); }
+    footer { text-align:center; padding:30px 0 60px; color:var(--muted); font-family:monospace; font-size:12px; }
+    @media (max-width:560px){ main{padding:6vh 6vw 10vh;} table.ledger{font-size:12px;} }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <a class="brand" href="prologue.html"><strong>The Skeptic</strong> · a ledger of what we know</a>
+    <nav class="topnav">
+      <a href="prologue.html">Prologue</a>
+      <a href="chapter1.html">Ch.1</a>
+      <a href="chapter2.html">Ch.2</a>
+    </nav>
+  </nav>
+  <main>
+    <section class="chapter" id="chapter-2">
+      <span class="casefile">Case file 2</span>
+      <div class="eyebrow">Part I · Seeing</div>
+      <h2>What the Instruments Actually Measure</h2>
+      <div class="rule"></div>
+      <p>The sentence from the previous chapter needs to be pulled apart before it can be tested. "The reading of the scale depends on where the scale is and what it is made of" sounds like a claim about scales. It is not, or not only. It is a claim about the relationship between the apparatus and the world, and about what any number that comes out of that relationship is actually reporting.</p>
+      <p>The instrument's first job is not to tell the truth. That is a human phrase applied to a machine. The instrument's job is to <em>register a state and convert it into a number in a specified range, by a specified rule.</em> A thermometer does not know the temperature; it has a column of liquid that expands when heated, and the glass tube turns that expansion into a mark against a scale. The mark is real. The "temperature" is the interpretation we put on the mark, and that interpretation is where the first layer of inference begins.</p>
+          <h3>The evidence ledger</h3>
+    <div class="ledger">
+      <table>
+        <thead>
+          <tr><th>Observed</th><th>Inferred</th><th>Unknown</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A person said they saw something. A record exists. The statement is made with confidence.</td>
+            <td>That the statement is a reliable description of an external event. That the confidence level reflects the accuracy of the memory.</td>
+            <td>Whether the statement was shaped by expectation, suggestion, or the act of remembering. Whether the witness knew they would be asked.</td>
+          </tr>
+          <tr>
+            <td>Memory is reconstructed at each recall. Each retrieval changes the stored version. The "original" is not preserved.</td>
+            <td>That the most recent version is the most accurate. That repeated recall stabilizes the memory. That the witness's confidence tracks their accuracy.</td>
+            <td>How many times the event was recalled before the statement was made. Whether any of those recalls included new information.</td>
+          </tr>
+          <tr>
+            <td>A person claims to dream about a specific person, place, or event. The dream is reported after waking.</td>
+            <td>That the dream "means" something about that person, place, or event. That the dream is a record of something that happened.</td>
+            <td>Whether the dream content was assembled from prior exposure to that person, place, or event. Whether the dream reports anything that was not already in memory.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</section>
+  </main>
+  <footer>
+    <p class="colophon">The Skeptic · manuscript · <a href="part1.html">open the full text</a></p>
+  </footer>
+</body>
+</html>

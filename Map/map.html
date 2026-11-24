@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheSkeptic — Scientific Dependency Map</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --border:#30363d; --text:#c9d1d9; --dim:#8b949e; --accent:#58a6ff; --green:#3fb950; --amber:#d29922; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.55 -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--text); }
+  header { padding:28px 32px 12px; max-width:1100px; margin:0 auto; }
+  h1 { font-size:1.4rem; margin:0 0 4px; }
+  .sub { color:var(--dim); font-size:.9rem; }
+  main { padding:0 32px 48px; max-width:1100px; margin:0 auto; }
+  section { margin-top:32px; }
+  h2 { font-size:1.1rem; border-bottom:1px solid var(--border); padding-bottom:6px; }
+  .map-viewport { position:relative; height:1600px; overflow:hidden; background:var(--panel); border:1px solid var(--border); border-radius:8px; cursor:grab; touch-action:none; }
+  .map-viewport.dragging { cursor:grabbing; }
+  .map-stage { position:absolute; top:0; left:0; width:100%; transform-origin:0 0; will-change:transform; }
+  .mermaid { background:transparent; border:0; border-radius:0; padding:24px; overflow:visible; }
+  .map-controls { display:flex; gap:8px; align-items:center; margin-top:10px; }
+  .map-controls button { background:var(--panel); border:1px solid var(--border); color:var(--text); border-radius:6px; padding:4px 14px; font-size:.95rem; cursor:pointer; }
+  .map-controls button:hover { border-color:var(--accent); color:var(--accent); }
+  .map-controls .zoom-level { color:var(--dim); font-size:.85rem; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; }
+  th, td { border:1px solid var(--border); padding:7px 10px; text-align:left; vertical-align:top; }
+  th { background:var(--panel); position:sticky; top:0; }
+  tr:nth-child(even) td { background:#12161d; }
+  .tag { display:inline-block; font-size:.72rem; padding:1px 7px; border-radius:10px; margin:1px 2px 1px 0; }
+  .s-done { background:#1f3a2c; color:#9be5b8; }
+  .s-draft { background:#3a2f1f; color:#e5c07b; }
+  .s-planned { background:#242b36; color:#9ecbff; }
+  code { background:#21262d; padding:1px 5px; border-radius:4px; font-size:.85em; }
+  .note { color:var(--dim); font-size:.85rem; margin-top:10px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>TheSkeptic — Scientific Dependency Map</h1>
+  <div class="sub" id="subtitle"></div>
+</header>
+<main>
+<section>
+  <h2>Visual tree</h2>
+  <div class="map-viewport" id="viewport">
+    <div class="map-stage" id="stage">
+      <pre class="mermaid" id="graph"></pre>
+    </div>
+  </div>
+  <div class="map-controls">
+    <button id="z-out" title="Zoom out">− zoom</button>
+    <button id="z-in" title="Zoom in">+ zoom</button>
+    <button id="z-fit" title="Fit whole map">Fit</button>
+    <span class="zoom-level" id="zoom-level"></span>
+  </div>
+  <p class="note">Node colour = topic status: <span class="tag s-done">done</span> <span class="tag s-draft">draft</span> <span class="tag s-planned">planned</span>. Edges read "topic depends on source" — top-down, each topic stands on the sources above it. <b>Scroll to zoom, drag to pan</b> (or use the buttons above).</p>
+</section>
+<section>
+  <h2>Dependency database</h2>
+  <table>
+    <thead><tr><th>#</th><th>id</th><th>Topic</th><th>Section</th><th>Status</th><th>Requires</th><th>Feeds</th><th>Notes</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <p class="note">Rendered from <code>Map/data.js</code> — topics + dependencies. "Requires" = topics this one depends on; "Feeds" = topics that depend on this one.</p>
+</section>
+</main>
+<script src="data.js"></script>
+<script>
+(function () {
+  var D = window.MANUSCRIPT_DATA;
+  if (!D) { document.body.insertAdjacentHTML('afterbegin', '<div style="padding:16px;color:#f85149">Map/data.js not found.</div>'); return; }
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+
+  var byId = {};
+  D.topics.forEach(function (t) { byId[t.id] = t; });
+  var requires = {}, feeds = {};
+  D.topics.forEach(function (t) { requires[t.id] = []; feeds[t.id] = []; });
+  D.dependencies.forEach(function (d) {
+    if (requires[d.topic]) requires[d.topic].push(d.on);
+    if (feeds[d.on]) feeds[d.on].push(d.topic);
+  });
+
+  var done = D.topics.filter(function (t) { return t.status === 'done'; }).length;
+  document.getElementById('subtitle').textContent =
+    D.topics.length + ' nodes · ' + done + ' written · each dependency expressed as a strict requirement · single source of truth in Map/data.js';
+
+  // Mermaid graph
+  var lines = ['flowchart TD'];
+  D.topics.forEach(function (t) {
+    lines.push('  ' + t.id + '["' + t.id + ' · ' + t.title.replace(/"/g, "'") + '"]');
+  });
+  D.dependencies.forEach(function (d) { lines.push('  ' + d.on + ' --> ' + d.topic); });
+  lines.push('  classDef done fill:#14241b,stroke:#3fb950,color:#9be5b8');
+  lines.push('  classDef draft fill:#211d12,stroke:#d29922,color:#e5c07b');
+  lines.push('  classDef planned fill:#161b22,stroke:#30363d,color:#8b949e');
+  D.topics.forEach(function (t) {
+    var cls = t.status === 'done' ? 'done' : t.status === 'draft' ? 'draft' : 'planned';
+    lines.push('  class ' + t.id + ' ' + cls);
+  });
+  document.getElementById('graph').textContent = lines.join('\n');
+
+  // --- Pan & zoom for the dependency map ---
+  var vp = document.getElementById('viewport');
+  var stage = document.getElementById('stage');
+  var view = { x: 0, y: 0, k: 1 };
+  var MIN_K = 0.15, MAX_K = 8;
+  function applyView() {
+    stage.style.transform = 'translate(' + view.x + 'px,' + view.y + 'px) scale(' + view.k + ')';
+    document.getElementById('zoom-level').textContent = Math.round(view.k * 100) + '%';
+  }
+  function zoomAt(cx, cy, factor) {
+    var k2 = Math.min(MAX_K, Math.max(MIN_K, view.k * factor));
+    var f = k2 / view.k;
+    view.x = cx - (cx - view.x) * f;
+    view.y = cy - (cy - view.y) * f;
+    view.k = k2;
+    applyView();
+  }
+  function fit() {
+    var svg = stage.querySelector('svg');
+    var r = vp.getBoundingClientRect();
+    var w = (svg && parseFloat(svg.getAttribute('width'))) || stage.offsetWidth;
+    var h = (svg && parseFloat(svg.getAttribute('height'))) || stage.offsetHeight;
+    if (!w || !h || !r.width || !r.height) return;
+    var k = Math.min(r.width / (w + 40), r.height / (h + 40));
+    k = Math.min(MAX_K, Math.max(MIN_K, k));
+    view.k = k;
+    view.x = (r.width - w * k) / 2;
+    view.y = Math.max(10, (r.height - h * k) / 2);
+    applyView();
+  }
+  window.addEventListener('resize', fit);
+  vp.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    var r = vp.getBoundingClientRect();
+    zoomAt(e.clientX - r.left, e.clientY - r.top, Math.exp(-e.deltaY * 0.0015));
+  }, { passive: false });
+  var pointers = {}, nPointers = 0, lastX = 0, lastY = 0, lastDist = 0;
+  vp.addEventListener('pointerdown', function (e) {
+    vp.setPointerCapture(e.pointerId);
+    pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+    nPointers++;
+    lastX = e.clientX; lastY = e.clientY; lastDist = 0;
+    if (nPointers === 1) vp.classList.add('dragging');
+  });
+  vp.addEventListener('pointermove', function (e) {
+    if (!pointers[e.pointerId]) return;
+    pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+    if (nPointers === 1) {
+      view.x += e.clientX - lastX;
+      view.y += e.clientY - lastY;
+      lastX = e.clientX; lastY = e.clientY;
+      applyView();
+    } else if (nPointers === 2) {
+      var ids = Object.keys(pointers);
+      var a = pointers[ids[0]], b = pointers[ids[1]];
+      var d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (lastDist) {
+        var r = vp.getBoundingClientRect();
+        zoomAt((a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top, d / lastDist);
+      }
+      lastDist = d;
+    }
+  });
+  function releasePointer(e) {
+    delete pointers[e.pointerId];
+    nPointers = Math.max(0, nPointers - 1);
+    if (nPointers === 0) { vp.classList.remove('dragging'); lastDist = 0; }
+  }
+  vp.addEventListener('pointerup', releasePointer);
+  vp.addEventListener('pointercancel', releasePointer);
+  document.getElementById('z-in').addEventListener('click', function () {
+    var r = vp.getBoundingClientRect();
+    zoomAt(r.width / 2, r.height / 2, 1.25);
+  });
+  document.getElementById('z-out').addEventListener('click', function () {
+    var r = vp.getBoundingClientRect();
+    zoomAt(r.width / 2, r.height / 2, 0.8);
+  });
+  document.getElementById('z-fit').addEventListener('click', fit);
+  applyView();
+  mermaid.initialize({ startOnLoad: false, theme: 'dark', flowchart: { curve: 'basis' } });
+  mermaid.run({ nodes: [document.getElementById('graph')] }).then(fit);
+
+  // Table
+  document.getElementById('rows').innerHTML = D.topics.map(function (t) {
+    var stCls = t.status === 'done' ? 's-done' : t.status === 'draft' ? 's-draft' : 's-planned';
+    return '<tr><td>' + t.section + '</td><td><code>' + t.id + '</code></td><td>' + t.title +
+      '</td><td>' + esc(t.section) + '</td><td><span class="tag ' + stCls + '">' + t.status + '</span></td>' +
+      '<td>' + (requires[t.id].length ? requires[t.id].join(', ') : '—') + '</td>' +
+      '<td>' + (feeds[t.id].length ? feeds[t.id].join(', ') : '—') + '</td>' +
+      '<td>' + t.desc + '</td></tr>';
+  }).join('');
+})();
+</script>
+</body>
+</html>
