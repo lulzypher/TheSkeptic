@@ -13,6 +13,11 @@ and assembly are done.
   Copy its entire <head> (CSS + meta) VERBATIM into every new chapter document.
 - Front matter + Case File 1: part1.html (done - never modify or overwrite).
 - Chapter specs: specs/spec_a.txt and specs/spec_b.txt (extra guidance for chapters 4-26).
+- Chapter state (Map source of truth): ../Map/data.js
+    Canonical chapter/topic state that all Map views read. When a chapter's
+    status changes, mirror it in Map/data.js so the Map stays accurate
+    (there is no separate STATUS.md).
+
 - Checker: check.py (tag-balance checker; it hardcodes chapter4.html - extend it to
   accept a file path as argv[1], then use it on every chapter you write).
 
